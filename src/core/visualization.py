@@ -10,6 +10,16 @@ import seaborn as sns
 import os
 import numpy as np
 import json
+import sys
+
+# 添加color_manager導入
+try:
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from src.utils.color_manager import color_manager
+    COLOR_MANAGER_AVAILABLE = True
+except ImportError:
+    COLOR_MANAGER_AVAILABLE = False
+    print("顏色管理器不可用，使用默認顏色")
 
 # Configure matplotlib to use Chinese font
 CHINESE_FONT_PATH = '/System/Library/Fonts/STHeiti Light.ttc'
@@ -87,9 +97,17 @@ class Visualizer:
         top_words = dict(sorted(word_freq.items(), key=lambda x: x[1], reverse=True)[:top_n])
         
         plt.figure(figsize=figsize)
+        
+        # 獲取統一顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colors = color_manager.get_categorical_colors('matplotlib')
+            palette = colors[:len(top_words)]
+        else:
+            palette = None
+        
         # 使用更高效的繪圖設置
         with plt.style.context('fast'):
-            ax = sns.barplot(x=list(top_words.values()), y=list(top_words.keys()))
+            ax = sns.barplot(x=list(top_words.values()), y=list(top_words.keys()), palette=palette)
         
         # 在每個條形上顯示數值
         for i, v in enumerate(list(top_words.values())):
@@ -196,8 +214,16 @@ class Visualizer:
             pos_freq_translated[translated_pos] = freq
         
         plt.figure(figsize=figsize)
+        
+        # 獲取統一顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colors = color_manager.get_categorical_colors('matplotlib')
+            palette = colors[:len(pos_freq_translated)]
+        else:
+            palette = None
+        
         with plt.style.context('fast'):
-            ax = sns.barplot(x=list(pos_freq_translated.values()), y=list(pos_freq_translated.keys()))
+            ax = sns.barplot(x=list(pos_freq_translated.values()), y=list(pos_freq_translated.keys()), palette=palette)
         
         # 在每個條形上顯示數值
         for i, v in enumerate(list(pos_freq_translated.values())):
@@ -231,7 +257,13 @@ class Visualizer:
                      SENTIMENT_MAPPING.get('negative', '負面情感'), 
                      SENTIMENT_MAPPING.get('neutral', '中性情感')]
         values = [positive, negative, neutral]
-        colors = ['green', 'red', 'blue']
+        
+        # 獲取統一的情感顏色
+        if COLOR_MANAGER_AVAILABLE:
+            sentiment_colors = color_manager.get_sentiment_colors()
+            colors = [sentiment_colors['positive'], sentiment_colors['negative'], sentiment_colors['neutral']]
+        else:
+            colors = ['#27AE60', '#E74C3C', '#5D6D7E']
         
         with plt.style.context('fast'):
             bars = plt.bar(categories, values, color=colors)
@@ -256,8 +288,16 @@ class Visualizer:
         top_ngrams = dict(sorted(ngrams.items(), key=lambda x: x[1], reverse=True)[:top_n])
         
         plt.figure(figsize=figsize)
+        
+        # 獲取統一顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colors = color_manager.get_categorical_colors('matplotlib')
+            palette = colors[:len(top_ngrams)]
+        else:
+            palette = None
+        
         with plt.style.context('fast'):
-            ax = sns.barplot(x=list(top_ngrams.values()), y=list(top_ngrams.keys()))
+            ax = sns.barplot(x=list(top_ngrams.values()), y=list(top_ngrams.keys()), palette=palette)
         
         # 在每個條形上顯示數值
         for i, v in enumerate(list(top_ngrams.values())):
@@ -287,10 +327,29 @@ class Visualizer:
         if not entity_counts:
             return
         
+        # 獲取實體顏色配置
+        if COLOR_MANAGER_AVAILABLE:
+            entity_colors = color_manager.get_entity_colors()
+            # 為每個實體類型分配顏色
+            colors = []
+            for entity_type in entity_counts.keys():
+                # 從中文類型映射回英文類型來獲取顏色
+                eng_type = None
+                for eng, chi in ENTITY_MAPPING.items():
+                    if chi == entity_type:
+                        eng_type = eng
+                        break
+                if eng_type:
+                    colors.append(entity_colors.get(eng_type, entity_colors['default']))
+                else:
+                    colors.append(entity_colors['default'])
+        else:
+            colors = None
+        
         # 繪製餅圖
         plt.figure(figsize=figsize)
         with plt.style.context('fast'):
-            plt.pie(entity_counts.values(), labels=entity_counts.keys(), autopct='%1.1f%%')
+            plt.pie(entity_counts.values(), labels=entity_counts.keys(), autopct='%1.1f%%', colors=colors)
         
         plt.title(title)
         plt.axis('equal')  # 使餅圖為正圓形
@@ -306,8 +365,16 @@ class Visualizer:
         top_keywords = dict(sorted(keywords.items(), key=lambda x: x[1], reverse=True)[:top_n])
         
         plt.figure(figsize=figsize)
+        
+        # 獲取統一顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colors = color_manager.get_categorical_colors('matplotlib')
+            palette = colors[:len(top_keywords)]
+        else:
+            palette = None
+        
         with plt.style.context('fast'):
-            ax = sns.barplot(x=list(top_keywords.values()), y=list(top_keywords.keys()))
+            ax = sns.barplot(x=list(top_keywords.values()), y=list(top_keywords.keys()), palette=palette)
         
         # 在每個條形上顯示數值
         for i, v in enumerate(list(top_keywords.values())):

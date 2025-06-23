@@ -32,6 +32,14 @@ except ImportError:
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
+# 添加color_manager導入
+try:
+    from src.utils.color_manager import color_manager
+    COLOR_MANAGER_AVAILABLE = True
+except ImportError:
+    COLOR_MANAGER_AVAILABLE = False
+    print("顏色管理器不可用，使用默認顏色")
+
 class AdvancedVisualizer:
     """高級視覺化器"""
     
@@ -69,12 +77,18 @@ class AdvancedVisualizer:
         # 創建熱力圖
         mask = np.triu(np.ones_like(similarity_matrix, dtype=bool))
         
+        # 獲取統一的熱力圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colormap = color_manager.get_heatmap_colormap('matplotlib')
+        else:
+            colormap = 'RdYlBu_r'
+        
         sns.heatmap(
             similarity_matrix,
             mask=mask,
             annot=True,
             fmt='.3f',
-            cmap='RdYlBu_r',
+            cmap=colormap,
             vmin=0,
             vmax=1,
             center=0.5,
@@ -107,11 +121,17 @@ class AdvancedVisualizer:
         if labels is None:
             labels = [f"文本{i+1}" for i in range(len(similarity_matrix))]
         
+        # 獲取統一的熱力圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colorscale = color_manager.get_heatmap_colormap('plotly')
+        else:
+            colorscale = 'RdYlBu_r'
+        
         fig = go.Figure(data=go.Heatmap(
             z=similarity_matrix,
             x=labels,
             y=labels,
-            colorscale='RdYlBu_r',
+            colorscale=colorscale,
             zmin=0,
             zmax=1,
             text=np.round(similarity_matrix, 3),
@@ -157,15 +177,24 @@ class AdvancedVisualizer:
         # 計算佈局
         pos = nx.spring_layout(G, k=3, iterations=50)
         
+        # 獲取網絡圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            network_colors = color_manager.get_network_colors()
+            node_color = network_colors['nodes']
+            edge_color = network_colors['edges']
+        else:
+            node_color = 'lightblue'
+            edge_color = 'gray'
+        
         # 繪製節點
-        nx.draw_networkx_nodes(G, pos, node_color='lightblue', 
+        nx.draw_networkx_nodes(G, pos, node_color=node_color, 
                               node_size=1000, alpha=0.7)
         
         # 繪製邊，線寬根據相似度權重調整
         edges = G.edges()
         weights = [G[u][v]['weight'] for u, v in edges]
         nx.draw_networkx_edges(G, pos, width=[w*5 for w in weights], 
-                              alpha=0.6, edge_color='gray')
+                              alpha=0.6, edge_color=edge_color)
         
         # 添加標籤
         labels_dict = {i: labels[i] for i in range(len(labels))}
@@ -229,10 +258,19 @@ class AdvancedVisualizer:
         # 創建圖形
         fig = go.Figure()
         
+        # 獲取網絡圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            network_colors = color_manager.get_network_colors()
+            node_color = network_colors['nodes']
+            edge_color = network_colors['edges']
+        else:
+            node_color = 'lightblue'
+            edge_color = 'gray'
+        
         # 添加邊
         fig.add_trace(go.Scatter(
             x=edge_x, y=edge_y,
-            line=dict(width=2, color='gray'),
+            line=dict(width=2, color=edge_color),
             hoverinfo='none',
             mode='lines',
             name='連接'
@@ -247,7 +285,7 @@ class AdvancedVisualizer:
             textposition="middle center",
             marker=dict(
                 size=30,
-                color='lightblue',
+                color=node_color,
                 line=dict(width=2, color='DarkSlateGrey')
             ),
             name='文本節點'
@@ -308,11 +346,17 @@ class AdvancedVisualizer:
                 row.append(freq)
             matrix.append(row)
         
+        # 獲取統一的熱力圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colorscale = color_manager.get_heatmap_colormap('plotly')
+        else:
+            colorscale = 'Viridis'
+        
         fig = go.Figure(data=go.Heatmap(
             z=matrix,
             x=words,
             y=pos_types,
-            colorscale='Viridis',
+            colorscale=colorscale,
             hoverongaps=False
         ))
         
@@ -409,9 +453,10 @@ class AdvancedVisualizer:
         
         # 添加邊
         if edge_x:  # 只有當有邊時才添加
+            edge_color = color_manager.get_network_colors()['edges'] if COLOR_MANAGER_AVAILABLE else 'gray'
             fig.add_trace(go.Scatter(
                 x=edge_x, y=edge_y,
-                line=dict(width=1, color='gray'),
+                line=dict(width=1, color=edge_color),
                 hoverinfo='none',
                 mode='lines',
                 name='詞語關聯'
@@ -426,7 +471,7 @@ class AdvancedVisualizer:
             textposition="middle center",
             marker=dict(
                 size=node_size,
-                color='lightcoral',
+                color=color_manager.get_network_colors()['nodes'] if COLOR_MANAGER_AVAILABLE else 'lightcoral',
                 line=dict(width=2, color='DarkSlateGrey')
             ),
             name='詞語節點'
@@ -462,13 +507,19 @@ class AdvancedVisualizer:
         words = list(top_words.keys())
         frequencies = list(top_words.values())
         
+        # 獲取樹狀圖顏色
+        if COLOR_MANAGER_AVAILABLE:
+            colorscale = color_manager.get_treemap_colormap()
+        else:
+            colorscale = 'Viridis'
+        
         fig = go.Figure(go.Treemap(
             labels=words,
             values=frequencies,
             parents=[""] * len(words),
             textinfo="label+value",
             textfont_size=12,
-            marker_colorscale='Viridis'
+            marker_colorscale=colorscale
         ))
         
         fig.update_layout(

@@ -1,0 +1,39 @@
+{
+  "primary_palette": {
+    "primary": "#2E86AB",
+    "secondary": "#A23B72", 
+    "tertiary": "#F18F01",
+    "quaternary": "#C73E1D",
+    "quinary": "#592E83"
+  },
+  "sentiment_colors": {
+    "positive": "#27AE60",
+    "negative": "#E74C3C", 
+    "neutral": "#5D6D7E"
+  },
+  "entity_colors": {
+    "person": "#E74C3C",
+    "location": "#27AE60", 
+    "organization": "#3498DB",
+    "time": "#F39C12",
+    "default": "#95A5A6"
+  },
+  "matplotlib_palettes": {
+    "categorical": ["#2E86AB", "#A23B72", "#F18F01", "#C73E1D", "#592E83", "#27AE60", "#E74C3C", "#3498DB", "#F39C12", "#95A5A6"],
+    "sequential": "Blues",
+    "diverging": "RdYlBu_r"
+  },
+  "plotly_palettes": {
+    "categorical": ["#2E86AB", "#A23B72", "#F18F01", "#C73E1D", "#592E83", "#27AE60", "#E74C3C", "#3498DB", "#F39C12", "#95A5A6"],
+    "sequential": "Blues", 
+    "diverging": "RdYlBu_r",
+    "heatmap": "RdYlBu_r",
+    "treemap": "Viridis",
+    "network_nodes": "#2E86AB",
+    "network_edges": "#95A5A6"
+  },
+  "wordcloud_colors": {
+    "colormap": "Blues",
+    "background": "white"
+  }
+} 

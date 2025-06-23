@@ -576,6 +576,13 @@ function generateReport() {
         reportStatsList.appendChild(li);
     });
     
+    // Check if interactive visualizations need to be generated
+    if (!window.currentInteractiveResult) {
+        // Generate interactive visualizations first, then generate the report
+        generateInteractiveVisualizationsForReport();
+        return;
+    }
+    
     // Gather all available data for comprehensive report
     let reportData = {
         analysis_data: { 
@@ -1291,6 +1298,43 @@ function generateInteractiveVisualizations() {
     .catch(error => {
         console.error('Error:', error);
         alert('生成交互式圖表失敗: ' + error.message);
+    });
+}
+
+// Generate Interactive Visualizations specifically for report generation
+function generateInteractiveVisualizationsForReport() {
+    if (!currentAnalysisResult) {
+        alert('請先進行文本分析');
+        return;
+    }
+    
+    // Send request to generate advanced visualizations
+    fetch(`${API_BASE_URL}/api/visualizations/advanced`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ analysis_data: currentAnalysisResult }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('生成交互式圖表失敗');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Store the interactive visualization results
+        displayInteractiveVisualizations(data.visualizations);
+        
+        // Now that interactive visualizations are ready, generate the report
+        generateReport();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        
+        // Even if interactive visualization generation fails, continue with the report
+        // but without interactive visualizations
+        generateReport();
     });
 }
 

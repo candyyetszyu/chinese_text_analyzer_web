@@ -1308,6 +1308,7 @@ def generate_comprehensive_html_report(data, output_path, title='中文文本分
         
         for viz_type, viz_path in interactive_viz.items():
             viz_name = interactive_viz_names.get(viz_type, viz_type)
+            # For interactive visualizations, use the filename only since they're copied to the same directory
             filename = viz_path.split('/')[-1] if viz_path else ''
             html += f"""
             <div class="visualization-card full-width">
