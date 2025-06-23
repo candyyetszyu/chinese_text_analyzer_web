@@ -1,0 +1,48 @@
+# 人名 (People's names)
+習近平 3 nr
+李克強 3 nr
+馬雲 3 nr
+馬化騰 3 nr
+李彥宏 3 nr
+
+# 地名 (Place names)
+台灣 3 ns
+香港 3 ns
+澳門 3 ns
+深圳 3 ns
+廣州 3 ns
+上海 3 ns
+北京 3 ns
+
+# 機構名 (Organization names)
+阿里巴巴 5 nt
+騰訊 5 nt
+百度 5 nt
+華為 5 nt
+小米 5 nt
+美團 5 nt
+字節跳動 5 nt
+
+# 專業術語 (Technical terms)
+人工智能 5 n
+機器學習 5 n
+深度學習 5 n
+自然語言處理 5 n
+計算機視覺 5 n
+區塊鏈 5 n
+大數據 5 n
+雲計算 5 n
+物聯網 5 n
+神經網絡 5 n
+邊緣計算 5 n
+
+# 網路用語 (Internet slang)
+點贊 3 v
+轉發 3 v
+微博 3 n
+朋友圈 3 n
+表情包 3 n
+直播 3 v
+打卡 3 v
+vlog 3 n
+短視頻 3 n

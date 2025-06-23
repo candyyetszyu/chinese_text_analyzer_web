@@ -1,0 +1,122 @@
+{
+  "word_frequency": {
+    "文本": 3,
+    "一个": 1,
+    "测试": 1,
+    "用来": 1,
+    "验证": 1,
+    "原始": 1,
+    "显示": 1,
+    "功能": 1,
+    "我们": 1,
+    "一下": 1,
+    "这个": 1,
+    "中文": 1,
+    "词频": 1,
+    "情感": 1
+  },
+  "pos_frequency": {
+    "n": 6,
+    "v": 4,
+    "m": 2,
+    "r": 2,
+    "vn": 1,
+    "nz": 1
+  },
+  "pos_word_mapping": {
+    "m": [
+      "一下",
+      "一个"
+    ],
+    "vn": [
+      "测试"
+    ],
+    "n": [
+      "词频",
+      "情感",
+      "文本",
+      "功能"
+    ],
+    "v": [
+      "验证",
+      "用来",
+      "原始",
+      "显示"
+    ],
+    "r": [
+      "我们",
+      "这个"
+    ],
+    "nz": [
+      "中文"
+    ]
+  },
+  "avg_word_length": 2.0,
+  "total_words": 16,
+  "original_text": "这是一个测试文本，用来验证原始文本显示功能。我们来分析一下这个中文文本的词频和情感。",
+  "sentiment": {
+    "sentiment_score": 0,
+    "sentiment_label": "neutral",
+    "positive_count": 0,
+    "negative_count": 0
+  },
+  "entities": {
+    "person": [],
+    "location": [],
+    "organization": []
+  },
+  "keywords": {
+    "文本": 1.490808432395,
+    "词频": 0.7722598695555556,
+    "中文": 0.45267250073055554,
+    "验证": 0.43577186881944446,
+    "情感": 0.41390040165722225,
+    "测试": 0.3970688740766667,
+    "原始": 0.36619251590444446,
+    "用来": 0.35021017854611114,
+    "功能": 0.30620958227,
+    "一下": 0.27162645236777777,
+    "分析": 0.2690891675777778,
+    "显示": 0.25106917806444445,
+    "这是": 0.23842379313277778,
+    "这个": 0.19818472802833334,
+    "我们": 0.18840655372166668,
+    "一个": 0.15653060956277776
+  },
+  "ngrams": {
+    "一个测试": 1,
+    "测试文本": 1,
+    "文本用来": 1,
+    "用来验证": 1,
+    "验证原始": 1,
+    "原始文本": 1,
+    "文本显示": 1,
+    "显示功能": 1,
+    "功能我们": 1,
+    "我们一下": 1,
+    "一下这个": 1,
+    "这个中文": 1,
+    "中文文本": 1,
+    "文本词频": 1,
+    "词频情感": 1
+  },
+  "pos_distribution": {
+    "n": 6,
+    "v": 4,
+    "m": 2,
+    "r": 2,
+    "vn": 1,
+    "nz": 1
+  },
+  "visualizations": {
+    "wordcloud": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/wordcloud.png",
+    "word_frequency": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/word_freq.png",
+    "pos_distribution": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/pos_distribution.png",
+    "sentiment": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/sentiment.png",
+    "ngrams": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/ngrams.png",
+    "keywords": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/keywords.png",
+    "word_frequency_vertical": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/word_freq_vertical.png",
+    "word_frequency_pie": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/word_freq_pie.png",
+    "word_by_length": "/static/results/90fd76f2-5ddb-4aa9-8fb5-50bd9ecf0976/word_by_length.png"
+  }
+}

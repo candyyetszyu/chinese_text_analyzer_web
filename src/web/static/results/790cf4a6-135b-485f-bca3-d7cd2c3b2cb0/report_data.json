@@ -1,0 +1,109 @@
+{
+  "word_frequency": {
+    "文本": 2,
+    "一个": 1,
+    "测试": 1,
+    "我们": 1,
+    "验证": 1,
+    "HTML": 1,
+    "报告": 1,
+    "是否": 1,
+    "显示": 1,
+    "原始": 1,
+    "内容": 1
+  },
+  "pos_frequency": {
+    "n": 4,
+    "v": 4,
+    "m": 1,
+    "vn": 1,
+    "r": 1,
+    "eng": 1
+  },
+  "pos_word_mapping": {
+    "m": [
+      "一个"
+    ],
+    "vn": [
+      "测试"
+    ],
+    "n": [
+      "内容",
+      "文本",
+      "报告"
+    ],
+    "r": [
+      "我们"
+    ],
+    "v": [
+      "是否",
+      "验证",
+      "显示",
+      "原始"
+    ],
+    "eng": [
+      "HTML"
+    ]
+  },
+  "avg_word_length": 2.17,
+  "total_words": 12,
+  "original_text": "这是一个新的测试文本，我们来验证HTML报告是否显示原始文本内容。",
+  "sentiment": {
+    "sentiment_score": 0,
+    "sentiment_label": "neutral",
+    "positive_count": 0,
+    "negative_count": 0
+  },
+  "entities": {
+    "person": [],
+    "location": [],
+    "organization": []
+  },
+  "ngrams": {
+    "一个测试": 1,
+    "测试文本": 1,
+    "文本我们": 1,
+    "我们验证": 1,
+    "验证HTML": 1,
+    "HTML报告": 1,
+    "报告是否": 1,
+    "是否显示": 1,
+    "显示原始": 1,
+    "原始文本": 1,
+    "文本内容": 1
+  },
+  "keywords": {
+    "文本": 1.3761308606723075,
+    "HTML": 0.9195975002230768,
+    "验证": 0.60337643375,
+    "测试": 0.5497876717984616,
+    "原始": 0.5070357912523077,
+    "是否": 0.40341680095692306,
+    "报告": 0.40081077427538464,
+    "内容": 0.3949448749946154,
+    "显示": 0.34763424655076924,
+    "这是": 0.33012525203,
+    "我们": 0.2608706128453846,
+    "一个": 0.21673469016384614
+  },
+  "summary": "这是一个新的测试文本，我们来验证HTML报告是否显示原始文本内容。",
+  "pos_distribution": {
+    "n": 4,
+    "v": 4,
+    "m": 1,
+    "vn": 1,
+    "r": 1,
+    "eng": 1
+  },
+  "visualizations": {
+    "wordcloud": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/wordcloud.png",
+    "word_frequency": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/word_freq.png",
+    "pos_distribution": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/pos_distribution.png",
+    "sentiment": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/sentiment.png",
+    "entities": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/entities.png",
+    "word_freq_vertical": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/word_freq_vertical.png",
+    "word_freq_pie": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/word_freq_pie.png",
+    "ngrams": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/ngrams.png",
+    "keywords": "/static/results/790cf4a6-135b-485f-bca3-d7cd2c3b2cb0/keywords.png"
+  }
+}

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Text Analyzer - Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .section-title {
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+            margin: 2rem 0 1rem 0;
+        }
+        .feature-card {
+            transition: transform 0.2s;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .api-endpoint {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        .toc {
+            position: sticky;
+            top: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .chinese-text {
+            font-family: 'Microsoft YaHei', '微软雅黑', SimSun, '宋体', sans-serif;
+        }
+        .installation-step {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #28a745;
+        }
+        .port-method {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .bg-purple {
+            background-color: #9b59b6 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#advanced-features">Advanced</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#usage">Usage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#port-config">Port Config</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#api">API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Chinese Text Analyzer</h1>
+                    <p class="lead mb-4">
+                        A comprehensive Chinese text analysis application with both web and CLI interfaces. 
+                        Provides word frequency analysis, sentiment analysis, part-of-speech tagging, 
+                        named entity recognition, and text conversion between Traditional and Simplified Chinese.
+                        <br><strong>Now with advanced features:</strong> Text similarity analysis, interactive visualizations, 
+                        GPU acceleration, and multi-format file support.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#installation" class="btn btn-light btn-lg">Get Started</a>
+                        <a href="#features" class="btn btn-outline-light btn-lg">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fas fa-chart-bar fa-8x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Table of Contents -->
+            <div class="col-lg-3">
+                <div class="toc">
+                    <h5 class="text-primary">Table of Contents</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-decoration-none">Features</a></li>
+                        <li class="ms-2"><a href="#advanced-features" class="text-decoration-none small text-muted">Advanced Features</a></li>
+                        <li><a href="#installation" class="text-decoration-none">Installation</a></li>
+                        <li><a href="#usage" class="text-decoration-none">Usage</a></li>
+                        <li><a href="#port-config" class="text-decoration-none">Port Configuration</a></li>
+                        <li><a href="#api" class="text-decoration-none">API Documentation</a></li>
+                        <li><a href="#configuration" class="text-decoration-none">Configuration</a></li>
+                        <li><a href="#troubleshooting" class="text-decoration-none">Troubleshooting</a></li>
+                        <li><a href="#dependencies" class="text-decoration-none">Dependencies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                
+                <!-- Features Section -->
+                <section id="features">
+                    <h2 class="section-title">🚀 Features</h2>
+                    
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-line text-primary"></i> Text Analysis
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Word frequency analysis</li>
+                                        <li>✓ Part-of-speech distribution</li>
+                                        <li>✓ Named entity recognition</li>
+                                        <li>✓ Sentiment analysis</li>
+                                        <li>✓ Keyword extraction (TF-IDF)</li>
+                                        <li>✓ N-gram analysis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-pie text-success"></i> Visualizations
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Word clouds</li>
+                                        <li>✓ Interactive charts (bar, pie, line)</li>
+                                        <li>✓ Advanced analytics</li>
+                                        <li>✓ Word length distribution</li>
+                                        <li>✓ Export as PNG images</li>
+                                        <li>✓ Customizable themes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-language text-warning"></i> Text Conversion
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Traditional ↔ Simplified Chinese</li>
+                                        <li>✓ Batch processing</li>
+                                        <li>✓ Copy/download results</li>
+                                        <li>✓ Real-time conversion</li>
+                                        <li>✓ Multiple input formats</li>
+                                        <li>✓ Character encoding support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-download text-info"></i> Data Export
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Multiple formats (JSON, CSV, Excel)</li>
+                                        <li>✓ Comprehensive HTML reports</li>
+                                        <li>✓ Batch downloads (ZIP archives)</li>
+                                        <li>✓ Visualization exports</li>
+                                        <li>✓ Data analysis summaries</li>
+                                        <li>✓ Custom report templates</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Features Section -->
+                    <h3 id="advanced-features" class="text-primary mt-4 mb-3">🆕 Advanced Features</h3>
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100" style="border-left: 4px solid #e74c3c;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-project-diagram text-danger"></i> Text Similarity Analysis
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Multi-algorithm comparison (Semantic, TF-IDF, Jaccard)</li>
+                                        <li>✓ Transformer-based semantic analysis</li>
+                                        <li>✓ Interactive similarity matrices</li>
+                                        <li>✓ Relationship network graphs</li>
+                                        <li>✓ Batch text comparison</li>
+                                        <li>✓ Statistical similarity metrics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100" style="border-left: 4px solid #9b59b6;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-area text-purple"></i> Interactive Visualizations
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Plotly-powered interactive charts</li>
+                                        <li>✓ Word frequency heatmaps</li>
+                                        <li>✓ Network relationship graphs</li>
+                                        <li>✓ Hierarchical treemaps</li>
+                                        <li>✓ Comprehensive dashboards</li>
+                                        <li>✓ Export to standalone HTML</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100" style="border-left: 4px solid #f39c12;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-tasks text-warning"></i> Task Queue System
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ Celery-based distributed processing</li>
+                                        <li>✓ Redis backend for result storage</li>
+                                        <li>✓ Async task creation and tracking</li>
+                                        <li>✓ Background batch processing</li>
+                                        <li>✓ Scalable worker deployment</li>
+                                        <li>✓ Real-time status monitoring</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100" style="border-left: 4px solid #27ae60;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-rocket text-success"></i> Performance & File Support
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ GPU acceleration (CUDA support)</li>
+                                        <li>✓ PDF, DOCX, HTML parsing</li>
+                                        <li>✓ Markdown, CSV, JSON support</li>
+                                        <li>✓ Memory-efficient processing</li>
+                                        <li>✓ Automatic format detection</li>
+                                        <li>✓ Metadata extraction</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation Section -->
+                <section id="installation">
+                    <h2 class="section-title">🛠️ Installation</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Requirements:</strong> Python 3.8+ and pip package manager
+                    </div>
+
+                    <h4>Quick Setup (Recommended)</h4>
+                    
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 1: Clone the Repository</h6>
+                        <div class="code-block">
+                            <code>
+                                git clone &lt;repository-url&gt;<br>
+                                cd chinese_text_analyzer_web
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 2: Run Setup Script</h6>
+                        <div class="code-block">
+                            <code>python setup.py</code>
+                        </div>
+                        <small class="text-muted">This creates virtual environment and installs all dependencies</small>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 3: Activate Virtual Environment</h6>
+                        <div class="code-block">
+                            <code>
+                                # On macOS/Linux:<br>
+                                source venv/bin/activate<br><br>
+                                # On Windows:<br>
+                                venv\Scripts\activate
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 4: Run the Application</h6>
+                        <div class="code-block">
+                            <code>
+                                # Web interface:<br>
+                                python run_web.py<br><br>
+                                # CLI interface:<br>
+                                python run_cli.py
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">Manual Setup</h4>
+                    <p>If you prefer manual installation:</p>
+                    
+                    <div class="code-block">
+                        <code>
+                            # Create virtual environment<br>
+                            python3 -m venv venv<br>
+                            source venv/bin/activate  # On Windows: venv\Scripts\activate<br><br>
+                            
+                            # Install dependencies<br>
+                            pip install --upgrade pip<br>
+                            pip install -r requirements.txt<br><br>
+                            
+                            # Create necessary directories<br>
+                            mkdir -p data/input data/output/uploads src/web/static/results logs
+                        </code>
+                    </div>
+                </section>
+
+                <!-- Usage Section -->
+                <section id="usage">
+                    <h2 class="section-title">🌐 Usage</h2>
+                    
+                    <h4>Web Interface</h4>
+                    <ol>
+                        <li><strong>Start the web server:</strong>
+                            <div class="code-block"><code>python run_web.py</code></div>
+                        </li>
+                        <li><strong>Open your browser and navigate to:</strong>
+                            <div class="code-block"><code>http://localhost:3000</code></div>
+                        </li>
+                        <li><strong>Use the interface:</strong>
+                            <ul>
+                                <li><strong>Text Analysis Tab:</strong> Paste Chinese text and click <span class="chinese-text">"分析文本"</span> (Analyze Text)</li>
+                                <li><strong>Conversion Tab:</strong> Convert between Traditional and Simplified Chinese</li>
+                                <li><strong>Results Tabs:</strong> View analysis results in different chart types</li>
+                                <li><strong>Export Options:</strong> Download individual charts or complete reports</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Command Line Interface</h4>
+                    <ol>
+                        <li><strong>Start the CLI:</strong>
+                            <div class="code-block"><code>python run_cli.py</code></div>
+                        </li>
+                        <li><strong>Follow the interactive menu to:</strong>
+                            <ul>
+                                <li>Analyze single files or batch process directories</li>
+                                <li>Configure custom dictionaries and stopwords</li>
+                                <li>Set visualization options and export formats</li>
+                                <li>Convert text between Traditional and Simplified Chinese</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Direct CLI Usage</h4>
+                    <p>For advanced users, you can use the CLI directly:</p>
+                    <div class="code-block">
+                        <code>
+                            python src/cli/main.py --input "path/to/text.txt" \<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;--output "results/" \<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;--formats json,csv,excel \<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;--advanced-viz pie,vertical,length
+                        </code>
+                    </div>
+                </section>
+
+                <!-- Port Configuration Section -->
+                <section id="port-config">
+                    <h2 class="section-title">🔧 Port Configuration</h2>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Default Port:</strong> The application runs on port 3000 by default.
+                    </div>
+
+                    <h4>Method 1: Environment Variable (Recommended)</h4>
+                    <div class="port-method">
+                        <p>Set the <code>PORT</code> environment variable before running:</p>
+                        <div class="code-block">
+                            <code>
+                                # On macOS/Linux:<br>
+                                export PORT=8080<br>
+                                python run_web.py<br><br>
+                                
+                                # On Windows:<br>
+                                set PORT=8080<br>
+                                python run_web.py
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4>Method 2: Edit run_web.py</h4>
+                    <div class="port-method">
+                        <ol>
+                            <li>Open <code>run_web.py</code></li>
+                            <li>Change this line:
+                                <div class="code-block">
+                                    <code>
+                                        # Change this line:<br>
+                                        port = int(os.environ.get('PORT', 3000))<br><br>
+                                        
+                                        # To your desired port:<br>
+                                        port = int(os.environ.get('PORT', 8080))  # Example: port 8080
+                                    </code>
+                                </div>
+                            </li>
+                            <li>Save and run: <code>python run_web.py</code></li>
+                        </ol>
+                    </div>
+
+                    <h4>Method 3: Direct Flask App Configuration</h4>
+                    <div class="port-method">
+                        <ol>
+                            <li>Open <code>src/web/app.py</code></li>
+                            <li>Find the bottom of the file and change:
+                                <div class="code-block">
+                                    <code>
+                                        if __name__ == '__main__':<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;app.run(debug=True, port=3000)  # Change 3000 to your port
+                                    </code>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h4>Common Port Conflicts</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Port</th>
+                                    <th>Common Usage</th>
+                                    <th>Solution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5000</td>
+                                    <td>macOS Control Center (AirPlay Receiver)</td>
+                                    <td>Use port 3000 (default) or 8080</td>
+                                </tr>
+                                <tr>
+                                    <td>8080</td>
+                                    <td>Development servers</td>
+                                    <td>Use ports 3001, 8081, 9000</td>
+                                </tr>
+                                <tr>
+                                    <td>3000</td>
+                                    <td>React/Node.js apps</td>
+                                    <td>Use ports 3001, 3002, 8082</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb"></i> Important Notes:</h6>
+                        <ul class="mb-0">
+                            <li>Always restart the application after changing the port</li>
+                            <li>Update browser URL to match the new port</li>
+                            <li>Check firewall settings if accessing from other devices</li>
+                            <li>JavaScript API calls will automatically use the correct port</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- API Documentation -->
+                <section id="api">
+                    <h2 class="section-title">📊 API Documentation</h2>
+                    
+                    <p>The web application provides a comprehensive RESTful API for programmatic access to both basic and advanced text analysis features.</p>
+
+                    <h4>Base URL</h4>
+                    <div class="code-block">
+                        <code>http://localhost:3000</code>
+                    </div>
+
+                    <h4>Core Analysis Endpoints</h4>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/analyze</h5>
+                        <p><strong>Description:</strong> Analyze Chinese text and return comprehensive analysis results.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "您要分析的中文文本",<br>
+                                &nbsp;&nbsp;"advanced_viz": ["pie", "vertical", "length"]  // optional<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"analysis_id": "unique-analysis-id",<br>
+                                &nbsp;&nbsp;"word_frequency": {...},<br>
+                                &nbsp;&nbsp;"pos_distribution": {...},<br>
+                                &nbsp;&nbsp;"sentiment": {...},<br>
+                                &nbsp;&nbsp;"entities": {...},<br>
+                                &nbsp;&nbsp;"keywords": {...},<br>
+                                &nbsp;&nbsp;"ngrams": {...},<br>
+                                &nbsp;&nbsp;"visualizations": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"wordcloud": "/static/results/.../wordcloud.png",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"word_frequency": "/static/results/.../word_freq.png"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/convert</h5>
+                        <p><strong>Description:</strong> Convert text between Traditional and Simplified Chinese.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "要转换的中文文本",<br>
+                                &nbsp;&nbsp;"conversion_type": "s2t"  // "s2t" or "t2s"<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4>🆕 Advanced Analysis Endpoints</h4>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #e74c3c;">
+                        <h5><span class="badge bg-danger">POST</span> /api/similarity/analyze</h5>
+                        <p><strong>Description:</strong> Perform multi-text similarity analysis with semantic comparison.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"texts": [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第一个文本内容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第二个文本内容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第三个文本内容"<br>
+                                &nbsp;&nbsp;],<br>
+                                &nbsp;&nbsp;"algorithms": ["semantic", "tfidf", "jaccard"]  // optional<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"similarities": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"semantic": [[1.0, 0.85, 0.42], ...],<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"tfidf": [[1.0, 0.73, 0.31], ...],<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"jaccard": [[1.0, 0.68, 0.25], ...]<br>
+                                &nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;"labels": ["文本1", "文本2", "文本3"],<br>
+                                &nbsp;&nbsp;"visualizations": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity_heatmap": "/static/results/.../heatmap.png",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity_network": "/static/results/.../network.png"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #9b59b6;">
+                        <h5><span class="badge bg-purple">POST</span> /api/visualizations/advanced</h5>
+                        <p><strong>Description:</strong> Generate interactive Plotly visualizations.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"analysis_data": {...},  // Result from /api/analyze<br>
+                                &nbsp;&nbsp;"viz_types": ["heatmap", "network", "treemap", "dashboard"]<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"visualizations": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive_heatmap": "/static/results/.../heatmap.html",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive_network": "/static/results/.../network.html",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"treemap": "/static/results/.../treemap.html",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"dashboard": "/static/results/.../dashboard.html"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #f39c12;">
+                        <h5><span class="badge bg-warning">POST</span> /api/file/upload</h5>
+                        <p><strong>Description:</strong> Upload and parse various file formats (PDF, DOCX, HTML, Markdown, CSV, JSON).</p>
+                        
+                        <h6>Request (Multipart Form):</h6>
+                        <div class="code-block">
+                            <code>
+                                Content-Type: multipart/form-data<br>
+                                file: [binary file data]
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"filename": "document.pdf",<br>
+                                &nbsp;&nbsp;"content": "提取的文本内容...",<br>
+                                &nbsp;&nbsp;"metadata": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"pages": 10,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"file_size": "2.5 MB",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"format": "PDF"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4>Task Queue & System Endpoints</h4>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #27ae60;">
+                        <h5><span class="badge bg-success">POST</span> /api/tasks/create</h5>
+                        <p><strong>Description:</strong> Create background analysis tasks for batch processing.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"task_type": "batch_analysis",<br>
+                                &nbsp;&nbsp;"texts": ["文本1", "文本2", ...],<br>
+                                &nbsp;&nbsp;"options": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"include_similarity": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"generate_interactive": true<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"task_id": "task-uuid-12345",<br>
+                                &nbsp;&nbsp;"status": "pending",<br>
+                                &nbsp;&nbsp;"estimated_time": "2-5 minutes"<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #27ae60;">
+                        <h5><span class="badge bg-info">GET</span> /api/tasks/&lt;task_id&gt;/status</h5>
+                        <p><strong>Description:</strong> Check status of background tasks.</p>
+                        
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"task_id": "task-uuid-12345",<br>
+                                &nbsp;&nbsp;"status": "completed",  // pending, processing, completed, failed<br>
+                                &nbsp;&nbsp;"progress": 100,<br>
+                                &nbsp;&nbsp;"result_url": "/api/tasks/task-uuid-12345/result"<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #17a2b8;">
+                        <h5><span class="badge bg-info">GET</span> /api/system/capabilities</h5>
+                        <p><strong>Description:</strong> Check available system features and supported formats.</p>
+                        
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"similarity_analysis": true,<br>
+                                &nbsp;&nbsp;"advanced_visualization": true,<br>
+                                &nbsp;&nbsp;"task_queue": true,<br>
+                                &nbsp;&nbsp;"file_parsing": true,<br>
+                                &nbsp;&nbsp;"gpu_acceleration": false,<br>
+                                &nbsp;&nbsp;"supported_formats": ["pdf", "docx", "html", "md", "csv", "json"]<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4>Report Generation</h4>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/generate_report</h5>
+                        <p><strong>Description:</strong> Generate comprehensive analysis reports with advanced features.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "原始分析文本",<br>
+                                &nbsp;&nbsp;"options": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"basic": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"advanced": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"title": "自定义报告标题"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"report_id": "report-uuid-67890",<br>
+                                &nbsp;&nbsp;"report_url": "/static/results/.../report.html",<br>
+                                &nbsp;&nbsp;"includes": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"basic_analysis": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive_charts": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity_analysis": false<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-primary">GET</span> /api/download_report/&lt;report_id&gt;</h5>
+                        <p><strong>Description:</strong> Download generated reports as ZIP archives.</p>
+                        
+                        <h6>Response:</h6>
+                        <p>Returns a ZIP file containing all analysis results, visualizations, and interactive components.</p>
+                    </div>
+
+                    <h4>📋 Request/Response Examples</h4>
+                    
+                    <div class="alert alert-light">
+                        <h6><i class="fas fa-lightbulb"></i> Example: Complete Analysis Workflow</h6>
+                        <div class="code-block">
+                            <code>
+                                # 1. Basic text analysis<br>
+                                POST /api/analyze<br>
+                                {"text": "现代科技改变了人们的生活方式"}<br><br>
+                                
+                                # 2. Generate interactive visualizations<br>
+                                POST /api/visualizations/advanced<br>
+                                {"analysis_data": {analysis_result}}<br><br>
+                                
+                                # 3. Multi-text similarity analysis<br>
+                                POST /api/similarity/analyze<br>
+                                {"texts": ["text1", "text2", "text3"]}<br><br>
+                                
+                                # 4. Generate comprehensive report<br>
+                                POST /api/generate_report<br>
+                                {"text": "...", "options": {"advanced": true}}
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-info-circle"></i> Rate Limiting & Performance</h6>
+                        <ul class="mb-0">
+                            <li><strong>Rate Limit:</strong> 100 requests per minute per IP</li>
+                            <li><strong>File Upload Limit:</strong> 10MB per file</li>
+                            <li><strong>Batch Processing:</strong> Max 50 texts per similarity analysis</li>
+                            <li><strong>GPU Acceleration:</strong> Automatically used when available</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration">
+                    <h2 class="section-title">⚙️ Configuration</h2>
+                    
+                    <h4>Custom Dictionaries</h4>
+                    <ul>
+                        <li>Edit <code>config/custom_dict.txt</code> to add domain-specific terms</li>
+                        <li>Update <code>config/chinese_stopwords.txt</code> for custom stopword filtering</li>
+                        <li>Format: <code>word frequency pos_tag</code> (one per line)</li>
+                    </ul>
+
+                    <h4>Sentiment Analysis</h4>
+                    <ul>
+                        <li>Modify <code>config/positive_words.txt</code> for positive sentiment words</li>
+                        <li>Modify <code>config/negative_words.txt</code> for negative sentiment words</li>
+                        <li>Add one word per line</li>
+                    </ul>
+
+                    <h4>Font Configuration</h4>
+                    <p>For proper Chinese character display in visualizations:</p>
+                    <div class="code-block">
+                        <code>python src/utils/setup_chinese_font.py</code>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting Section -->
+                <section id="troubleshooting">
+                    <h2 class="section-title">🔧 Troubleshooting</h2>
+                    
+                    <div class="accordion" id="troubleshootingAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="port-issues">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePort">
+                                    Port Already in Use
+                                </button>
+                            </h2>
+                            <div id="collapsePort" class="accordion-collapse collapse show" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <strong>Problem:</strong> "Address already in use" error<br>
+                                    <strong>Solution:</strong>
+                                    <ul>
+                                        <li>Change the port using environment variable: <code>export PORT=8080</code></li>
+                                        <li>Kill existing process: <code>lsof -ti:3000 | xargs kill -9</code></li>
+                                        <li>Use a different port (see Port Configuration section)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="font-issues">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFont">
+                                    Chinese Characters Not Displaying
+                                </button>
+                            </h2>
+                            <div id="collapseFont" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <strong>Problem:</strong> Chinese characters show as squares in visualizations<br>
+                                    <strong>Solution:</strong>
+                                    <ul>
+                                        <li>Run font setup: <code>python src/utils/setup_chinese_font.py</code></li>
+                                        <li>Install Chinese fonts on your system</li>
+                                        <li>Restart the application after font installation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="dependency-issues">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeps">
+                                    Dependency Installation Errors
+                                </button>
+                            </h2>
+                            <div id="collapseDeps" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <strong>Problem:</strong> pip install failures<br>
+                                    <strong>Solution:</strong>
+                                    <ul>
+                                        <li>Update pip: <code>pip install --upgrade pip</code></li>
+                                        <li>Install build tools: <code>pip install wheel setuptools</code></li>
+                                        <li>For wordcloud issues on Python 3.13: <code>pip install --no-binary wordcloud wordcloud</code></li>
+                                        <li>Use conda instead: <code>conda install -c conda-forge wordcloud</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="upload-issues">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUpload">
+                                    File Upload Errors
+                                </button>
+                            </h2>
+                            <div id="collapseUpload" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <strong>Problem:</strong> Cannot upload files or files not processing<br>
+                                    <strong>Solution:</strong>
+                                    <ul>
+                                        <li>Check file encoding (should be UTF-8)</li>
+                                        <li>Ensure file size is under limit (10MB default)</li>
+                                        <li>Verify upload directory permissions</li>
+                                        <li>Check file extension (.txt, .md, .csv supported)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dependencies Section -->
+                <section id="dependencies">
+                    <h2 class="section-title">📦 Dependencies</h2>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h5>Core Libraries</h5>
+                            <ul>
+                                <li><strong>Flask</strong> - Web framework</li>
+                                <li><strong>jieba</strong> - Chinese text segmentation</li>
+                                <li><strong>opencc</strong> - Chinese text conversion</li>
+                                <li><strong>pandas</strong> - Data manipulation</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Visualization</h5>
+                            <ul>
+                                <li><strong>matplotlib</strong> - Plotting library</li>
+                                <li><strong>seaborn</strong> - Statistical visualization</li>
+                                <li><strong>wordcloud</strong> - Word cloud generation</li>
+                                <li><strong>plotly</strong> - Interactive charts</li>
+                                <li><strong>dash</strong> - Interactive web apps</li>
+                                <li><strong>networkx</strong> - Network graph analysis</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Machine Learning & NLP</h5>
+                            <ul>
+                                <li><strong>scikit-learn</strong> - TF-IDF, clustering</li>
+                                <li><strong>sentence-transformers</strong> - Semantic similarity</li>
+                                <li><strong>torch</strong> - PyTorch for GPU acceleration</li>
+                                <li><strong>numpy</strong> - Numerical computing</li>
+                                <li><strong>scipy</strong> - Scientific computing</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>File Processing & Export</h5>
+                            <ul>
+                                <li><strong>openpyxl</strong> - Excel file handling</li>
+                                <li><strong>Pillow</strong> - Image processing</li>
+                                <li><strong>requests</strong> - HTTP library</li>
+                                <li><strong>PyPDF2</strong> - PDF parsing</li>
+                                <li><strong>python-docx</strong> - DOCX processing</li>
+                                <li><strong>beautifulsoup4</strong> - HTML parsing</li>
+                                <li><strong>markdown</strong> - Markdown processing</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Task Queue & Backend</h5>
+                            <ul>
+                                <li><strong>celery</strong> - Distributed task queue</li>
+                                <li><strong>redis</strong> - In-memory data store</li>
+                                <li><strong>flask-cors</strong> - Cross-origin requests</li>
+                                <li><strong>gunicorn</strong> - WSGI HTTP server</li>
+                                <li><strong>psutil</strong> - System monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4">
+                        <h6><i class="fas fa-info-circle"></i> Version Requirements</h6>
+                        <p class="mb-0">
+                            See <code>requirements.txt</code> for specific version requirements. 
+                            The application is tested with Python 3.8+ and supports Python 3.13.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="text-center py-4 mt-5 border-top">
+                    <p class="text-muted">
+                        Chinese Text Analyzer - Built with ❤️ for text analysis enthusiasts
+                    </p>
+                    <p class="text-muted">
+                        <a href="#home" class="text-decoration-none">Back to top</a>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Update navbar on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+</html> 

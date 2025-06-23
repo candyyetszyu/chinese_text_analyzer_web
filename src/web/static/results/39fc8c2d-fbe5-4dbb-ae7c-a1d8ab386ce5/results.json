@@ -1,0 +1,53 @@
+{
+  "word_frequency": {
+    "测试": 1,
+    "文本": 1
+  },
+  "pos_frequency": {
+    "vn": 1,
+    "n": 1
+  },
+  "pos_word_mapping": {
+    "vn": [
+      "测试"
+    ],
+    "n": [
+      "文本"
+    ]
+  },
+  "avg_word_length": 2.0,
+  "total_words": 2,
+  "sentiment": {
+    "sentiment_score": 0,
+    "sentiment_label": "neutral",
+    "positive_count": 0,
+    "negative_count": 0
+  },
+  "entities": {
+    "person": [],
+    "location": [],
+    "organization": []
+  },
+  "keywords": {
+    "文本": 4.472425297185,
+    "测试": 3.57361986669
+  },
+  "ngrams": {
+    "测试文本": 1
+  },
+  "pos_distribution": {
+    "vn": 1,
+    "n": 1
+  },
+  "visualizations": {
+    "wordcloud": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/wordcloud.png",
+    "word_frequency": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/word_freq.png",
+    "pos_distribution": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/pos_distribution.png",
+    "sentiment": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/sentiment.png",
+    "ngrams": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/ngrams.png",
+    "keywords": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/keywords.png",
+    "word_frequency_vertical": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/word_freq_vertical.png",
+    "word_frequency_pie": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/word_freq_pie.png",
+    "word_by_length": "/static/results/39fc8c2d-fbe5-4dbb-ae7c-a1d8ab386ce5/word_by_length.png"
+  }
+}

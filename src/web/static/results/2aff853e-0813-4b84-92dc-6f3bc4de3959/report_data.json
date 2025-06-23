@@ -1,0 +1,75 @@
+{
+  "word_frequency": {
+    "一个": 1,
+    "测试": 1,
+    "文本": 1,
+    "用来": 1,
+    "生成": 1,
+    "报告": 1
+  },
+  "pos_frequency": {
+    "n": 2,
+    "v": 2,
+    "m": 1,
+    "vn": 1
+  },
+  "pos_word_mapping": {
+    "m": [
+      "一个"
+    ],
+    "vn": [
+      "测试"
+    ],
+    "n": [
+      "报告",
+      "文本"
+    ],
+    "v": [
+      "用来",
+      "生成"
+    ]
+  },
+  "avg_word_length": 2.0,
+  "total_words": 6,
+  "sentiment": {
+    "sentiment_score": 0,
+    "sentiment_label": "neutral",
+    "positive_count": 0,
+    "negative_count": 0
+  },
+  "entities": {
+    "person": [],
+    "location": [],
+    "organization": []
+  },
+  "ngrams": {
+    "一个测试": 1,
+    "测试文本": 1,
+    "文本用来": 1,
+    "用来生成": 1,
+    "生成报告": 1
+  },
+  "keywords": {
+    "文本": 1.277835799195714,
+    "测试": 1.0210342476257144,
+    "生成": 0.9692993608271429,
+    "用来": 0.9005404591185714,
+    "报告": 0.7443628665114286,
+    "这是": 0.61308975377,
+    "一个": 0.4025072817328571
+  },
+  "summary": "这是一个测试文本，用来生成报告。",
+  "pos_distribution": {
+    "n": 2,
+    "v": 2,
+    "m": 1,
+    "vn": 1
+  },
+  "visualizations": {
+    "wordcloud": "/static/results/2aff853e-0813-4b84-92dc-6f3bc4de3959/wordcloud.png",
+    "word_frequency": "/static/results/2aff853e-0813-4b84-92dc-6f3bc4de3959/word_freq.png",
+    "pos_distribution": "/static/results/2aff853e-0813-4b84-92dc-6f3bc4de3959/pos_distribution.png",
+    "sentiment": "/static/results/2aff853e-0813-4b84-92dc-6f3bc4de3959/sentiment.png",
+    "entities": "/static/results/2aff853e-0813-4b84-92dc-6f3bc4de3959/entities.png"
+  }
+}

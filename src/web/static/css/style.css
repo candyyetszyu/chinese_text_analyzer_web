@@ -1,0 +1,455 @@
+/* 基本样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 
+                'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+textarea {
+    font-size: 16px;
+    resize: vertical;
+}
+
+.container-fluid {
+    max-width: 1400px;
+}
+
+/* 卡片样式 */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+
+/* Visualization cards */
+.viz-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
+
+.viz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.viz-img {
+    cursor: pointer;
+    max-height: 300px;
+    object-fit: contain;
+    transition: opacity 0.2s;
+}
+
+.viz-img:hover {
+    opacity: 0.9;
+}
+
+/* Visualization containers */
+.viz-container {
+    position: relative;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.viz-container:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    transform: translateY(-2px);
+}
+
+.viz-title {
+    padding: 10px 15px;
+    margin: 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.viz-content {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* 导航选项卡样式 */
+.nav-tabs .nav-link {
+    color: #495057;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    font-weight: 600;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.nav-pills .nav-link {
+    color: #495057;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 按钮样式 */
+.btn {
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+}
+
+.btn-primary:hover {
+    background-color: #1765cc;
+    border-color: #1765cc;
+}
+
+.btn-success {
+    background-color: #34a853;
+    border-color: #34a853;
+}
+
+.btn-success:hover {
+    background-color: #2d9247;
+    border-color: #2d9247;
+}
+
+.download-btn {
+    padding: 0.2rem 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.download-btn:hover {
+    opacity: 1;
+}
+
+/* Download links */
+.download-link {
+    color: #6c757d;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.download-link:hover {
+    color: #0d6efd;
+}
+
+/* 表单控件样式 */
+.form-control {
+    border-radius: 6px;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 加载指示器样式 */
+#loadingIndicator, #reportLoadingIndicator {
+    padding: 40px 0;
+}
+
+/* 图表容器样式 */
+.img-fluid {
+    max-height: 280px;
+    margin: 0 auto;
+}
+
+/* 数据展示样式 */
+.json-display {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+/* 表格样式 */
+.frequency-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.frequency-table th, .frequency-table td {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.frequency-table th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+}
+
+.frequency-bar {
+    height: 16px;
+    background-color: #0d6efd;
+    border-radius: 2px;
+    margin-right: 8px;
+}
+
+.frequency-number {
+    font-size: 0.875rem;
+    color: #495057;
+}
+
+.table {
+    font-size: 14px;
+}
+
+.table th {
+    background-color: #f0f0f0;
+}
+
+/* 实体标签样式 */
+.entity-item {
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+    border-radius: 1em;
+    font-size: 0.875em;
+    background-color: #e9ecef;
+}
+
+.entity-tag {
+    display: inline-block;
+    margin: 3px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+}
+
+.entity-person {
+    background-color: #ffccd5;
+}
+
+.entity-location {
+    background-color: #c2e7ff;
+}
+
+.entity-organization {
+    background-color: #d7f9e9;
+}
+
+.entity-time {
+    background-color: #fff2cc;
+}
+
+.entity-other {
+    background-color: #e6e6fa;
+}
+
+/* Sentiment styling */
+.sentiment-positive {
+    color: #198754;
+}
+
+.sentiment-negative {
+    color: #dc3545;
+}
+
+.sentiment-neutral {
+    color: #6c757d;
+}
+
+/* 分析结果区域样式 */
+#analysisResults {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.card-animate-enter {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 报告部分样式 */
+#report .card {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#reportResult {
+    animation: slideDown 0.5s ease-in-out;
+}
+
+.report-container {
+    min-height: 400px;
+    padding: 15px;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .viz-content {
+        min-height: 150px;
+    }
+    
+    .viz-img {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    
+    .viz-img {
+        max-height: 250px;
+    }
+
+    .card-columns {
+        column-count: 1;
+    }
+    
+    .img-fluid {
+        max-height: 220px;
+    }
+
+    .download-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .download-options {
+        margin-top: 10px;
+    }
+}
+
+/* 高亮显示结果卡片 */
+.result-highlight {
+    border: 2px solid #1a73e8;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.4);
+    }
+    50% {
+        opacity: 1;
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(26, 115, 232, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 115, 232, 0);
+        opacity: 0.6;
+    }
+}
+
+/* 导航选项卡图标样式 */
+.nav-link i {
+    margin-right: 5px;
+}
+
+/* 进度条样式 */
+.progress {
+    height: 6px;
+    margin-bottom: 10px;
+}
+
+/* 词云特殊样式 */
+#wordcloudImg {
+    background-color: white;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* 高级可视化样式 */
+#advanced-viz .card {
+    min-height: 350px;
+}
+
+/* 综合报告预览样式 */
+#reportPreview {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Navigation pills for visualizations */
+#visualizationTab {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* JSON display */
+.pre-scrollable {
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Add some nice transitions */
+.tab-pane {
+    transition: opacity 0.3s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+}
+
+.tab-pane:not(.show) {
+    opacity: 0;
+}
+
+/* Badge styling */
+#sentimentBadge.sentiment-positive {
+    background-color: #198754;
+}
+
+#sentimentBadge.sentiment-negative {
+    background-color: #dc3545;
+}
+
+#sentimentBadge.sentiment-neutral {
+    background-color: #6c757d;
+}
