@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Development - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="docs-common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="usage.html">Usage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="configuration.html">Configuration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="api.html">API</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="ml-development.html">ML Development</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        機器學習開發
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#ml-overview">
+                                <i class="fas fa-brain"></i> 機器學習概覽
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#custom-models">
+                                <i class="fas fa-cogs"></i> 自訂模型
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#training">
+                                <i class="fas fa-graduation-cap"></i> 模型訓練
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gpu-setup">
+                                <i class="fas fa-microchip"></i> GPU 設定
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#extensions">
+                                <i class="fas fa-puzzle-piece"></i> 擴充功能
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#deployment">
+                                <i class="fas fa-rocket"></i> 機器學習部署
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="fas fa-brain text-primary"></i> 機器學習開發
+                    </h1>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>ML Framework:</strong> Extend the analyzer with custom machine learning models for advanced Chinese text processing.
+                </div>
+
+                <!-- ML Overview -->
+                <section id="ml-overview" class="mb-5">
+                    <h2><i class="fas fa-brain text-primary"></i> 機器學習概覽</h2>
+                    <p>The Chinese Text Analyzer provides a flexible framework for integrating custom machine learning models.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Supported ML Tasks</h4>
+                            <ul>
+                                <li><strong>Text Classification:</strong> Topic, sentiment, intent</li>
+                                <li><strong>Named Entity Recognition:</strong> Custom entity types</li>
+                                <li><strong>Text Similarity:</strong> Semantic matching</li>
+                                <li><strong>Text Generation:</strong> Summarization, completion</li>
+                                <li><strong>Language Modeling:</strong> Custom domain models</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>ML Framework Support</h4>
+                            <ul>
+                                <li><strong>PyTorch:</strong> Primary framework</li>
+                                <li><strong>TensorFlow:</strong> Full support</li>
+                                <li><strong>Transformers:</strong> Hugging Face models</li>
+                                <li><strong>scikit-learn:</strong> Classical ML</li>
+                                <li><strong>spaCy:</strong> NLP pipelines</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Custom Models -->
+                <section id="custom-models" class="mb-5">
+                    <h2><i class="fas fa-cogs text-primary"></i> Custom Models</h2>
+                    
+                    <h4>Model Integration Example</h4>
+                    <div class="code-block">
+                        <pre><code># src/ml/custom_classifier.py
+from src.core.analyzer import BaseModel
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+class CustomSentimentModel(BaseModel):
+    def __init__(self, model_path):
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
+    
+    def predict(self, text):
+        inputs = self.tokenizer(text, return_tensors="pt", truncation=True, padding=True)
+        outputs = self.model(**inputs)
+        predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
+        return predictions.tolist()
+    
+    def predict_batch(self, texts):
+        results = []
+        for text in texts:
+            results.append(self.predict(text))
+        return results</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+
+                    <h4>Model Registration</h4>
+                    <div class="code-block">
+                        <pre><code># Register custom model
+from src.ml.custom_classifier import CustomSentimentModel
+
+# In your analyzer configuration
+analyzer.register_model('custom_sentiment', CustomSentimentModel('path/to/model'))
+
+# Use in analysis
+result = analyzer.analyze_with_model(text, model_name='custom_sentiment')</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
+
+                <!-- Training -->
+                <section id="training" class="mb-5">
+                    <h2><i class="fas fa-graduation-cap text-primary"></i> Model Training</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Training Setup</h4>
+                            <div class="code-block">
+                                <pre><code># training/train_sentiment.py
+import torch
+from torch.utils.data import DataLoader
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from sklearn.model_selection import train_test_split
+
+class SentimentTrainer:
+    def __init__(self, model_name, num_labels=3):
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            model_name, num_labels=num_labels
+        )
+    
+    def prepare_data(self, texts, labels):
+        encodings = self.tokenizer(
+            texts, truncation=True, padding=True, return_tensors="pt"
+        )
+        return encodings, torch.tensor(labels)
+    
+    def train(self, train_texts, train_labels, epochs=3):
+        train_encodings, train_labels = self.prepare_data(train_texts, train_labels)
+        
+        optimizer = torch.optim.AdamW(self.model.parameters(), lr=5e-5)
+        
+        for epoch in range(epochs):
+            self.model.train()
+            outputs = self.model(**train_encodings, labels=train_labels)
+            loss = outputs.loss
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+            
+        self.model.save_pretrained('./models/custom_sentiment')</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Training Script</h4>
+                            <div class="code-block">
+                                <pre><code># Run training
+python training/train_sentiment.py \
+    --data data/training/sentiment_data.csv \
+    --model bert-base-chinese \
+    --epochs 5 \
+    --batch_size 16 \
+    --learning_rate 2e-5
+
+# Evaluate model
+python training/evaluate.py \
+    --model ./models/custom_sentiment \
+    --test_data data/test/sentiment_test.csv
+
+# Export for deployment
+python training/export_model.py \
+    --model ./models/custom_sentiment \
+    --output ./models/sentiment_production.onnx</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GPU Setup -->
+                <section id="gpu-setup" class="mb-5">
+                    <h2><i class="fas fa-microchip text-primary"></i> GPU Setup</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>CUDA Installation</h4>
+                            <div class="code-block">
+                                <pre><code># Install CUDA-enabled PyTorch
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Install additional GPU libraries
+pip install cupy-cuda11x
+pip install tensorflow-gpu
+
+# Verify GPU availability
+python -c "import torch; print(torch.cuda.is_available())"</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>GPU Configuration</h4>
+                            <div class="code-block">
+                                <pre><code># config/gpu_config.json
+{
+  "gpu": {
+    "enabled": true,
+    "device_id": 0,
+    "memory_limit": "8GB",
+    "allow_growth": true,
+    "mixed_precision": true
+  },
+  "models": {
+    "bert": {
+      "batch_size": 32,
+      "max_length": 512,
+      "use_fp16": true
+    }
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>GPU Memory:</strong> Monitor GPU memory usage, especially with large models. Use gradient checkpointing for memory optimization.
+                    </div>
+                </section>
+
+                <!-- Extensions -->
+                <section id="extensions" class="mb-5">
+                    <h2><i class="fas fa-puzzle-piece text-primary"></i> Extensions</h2>
+                    
+                    <h4>Available Extensions</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Text Classification Extension</h5>
+                            <div class="code-block">
+                                <pre><code># Install extension
+pip install chinese-analyzer-classification
+
+# Use in code
+from chinese_analyzer.extensions import ClassificationExtension
+
+classifier = ClassificationExtension()
+result = classifier.classify(text, categories=['news', 'review', 'academic'])</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>NER Extension</h5>
+                            <div class="code-block">
+                                <pre><code># Install NER extension
+pip install chinese-analyzer-ner
+
+# Custom entity recognition
+from chinese_analyzer.extensions import NERExtension
+
+ner = NERExtension()
+entities = ner.extract_entities(text, types=['PRODUCT', 'BRAND'])</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Deployment -->
+                <section id="deployment" class="mb-5">
+                    <h2><i class="fas fa-rocket text-primary"></i> ML Model Deployment</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Docker Deployment</h4>
+                            <div class="code-block">
+                                <pre><code># Dockerfile.ml
+FROM pytorch/pytorch:latest
+
+WORKDIR /app
+COPY requirements-ml.txt .
+RUN pip install -r requirements-ml.txt
+
+COPY models/ ./models/
+COPY src/ ./src/
+
+EXPOSE 5000
+CMD ["python", "run_ml_server.py"]</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Model Serving</h4>
+                            <div class="code-block">
+                                <pre><code># serve_models.py
+from flask import Flask, request, jsonify
+from src.ml.model_manager import ModelManager
+
+app = Flask(__name__)
+manager = ModelManager()
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.json
+    text = data['text']
+    model_name = data.get('model', 'default')
+    
+    result = manager.predict(text, model_name)
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="alert alert-success">
+                    <h5><i class="fas fa-graduation-cap"></i> Advanced ML Topics</h5>
+                    <p>Explore advanced machine learning integration:</p>
+                    <ul class="mb-0">
+                        <li>Fine-tuning pre-trained Chinese language models</li>
+                        <li>Multi-task learning for joint NLP tasks</li>
+                        <li>Active learning for continuous model improvement</li>
+                        <li>Model distillation for production optimization</li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 

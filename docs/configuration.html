@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Guide - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="docs-common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="usage.html">Usage</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="configuration.html">Configuration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="api.html">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        設定
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#config-overview">
+                                <i class="fas fa-info-circle"></i> 概覽
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#dictionaries">
+                                <i class="fas fa-book"></i> 自訂詞典
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sentiment-config">
+                                <i class="fas fa-heart"></i> 情感設定
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#stopwords">
+                                <i class="fas fa-filter"></i> 停用詞
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visualization-config">
+                                <i class="fas fa-palette"></i> 視覺化設定
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mappings">
+                                <i class="fas fa-exchange-alt"></i> 實體映射
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#performance">
+                                <i class="fas fa-tachometer-alt"></i> 效能設定
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#web-config">
+                                <i class="fas fa-globe"></i> 網頁設定
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="fas fa-cogs text-primary"></i> 設定指南
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="usage.html" class="btn btn-sm btn-outline-secondary">← Usage</a>
+                            <a href="api.html" class="btn btn-sm btn-outline-secondary">API →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuration Overview -->
+                <section id="config-overview" class="mb-5">
+                    <h2><i class="fas fa-info-circle text-primary"></i> 設定概覽</h2>
+                    <p>The Chinese Text Analyzer provides extensive configuration options to customize analysis behavior for your specific needs.</p>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-folder"></i>
+                        <strong>Configuration Location:</strong> All configuration files are located in the <code>./config/</code> directory.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Configuration File Structure</h4>
+                            <div class="code-block">
+                                <pre><code>config/
+├── chinese_stopwords.txt      # Stop words list
+├── custom_dict.txt            # Custom dictionary
+├── positive_words.txt         # Positive sentiment words
+├── negative_words.txt         # Negative sentiment words
+├── color_scheme.json          # Visualization colors
+└── mappings/
+    ├── entity_mapping.json    # Entity type mappings
+    ├── pos_mapping.json       # POS tag mappings
+    └── sentiment_mapping.json # Sentiment mappings</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Configuration Priority</h4>
+                            <p>Configuration files are loaded in the following order (later overrides earlier):</p>
+                            <ol>
+                                <li><strong>Default settings</strong> (built-in)</li>
+                                <li><strong>System config</strong> (./config/)</li>
+                                <li><strong>User config</strong> (~/.chinese_analyzer/)</li>
+                                <li><strong>Project config</strong> (./local_config/)</li>
+                                <li><strong>Environment variables</strong></li>
+                                <li><strong>Command line arguments</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Custom Dictionaries -->
+                <section id="dictionaries" class="mb-5">
+                    <h2><i class="fas fa-book text-primary"></i> Custom Dictionaries</h2>
+                    <p>Enhance text segmentation accuracy by adding domain-specific terms and proper nouns.</p>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Dictionary Format</h4>
+                            <p>Add custom words to <code>config/custom_dict.txt</code> using the following format:</p>
+                            <div class="code-block">
+                                <pre><code># Format: word frequency pos_tag
+# Lines starting with # are comments
+
+# Technology terms
+人工智慧 100 n
+機器學習 90 n
+深度學習 85 n
+神經網路 80 n
+
+# Company names
+阿里巴巴 95 nr
+騰訊公司 90 nr
+百度集團 85 nr
+
+# Domain-specific terms
+區塊鏈技術 75 n
+雲端運算平台 70 n
+大數據分析 80 n
+
+# Names and places
+北京大學 85 ns
+清華大學 85 ns
+中關村 75 ns</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>POS Tag Reference</h4>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr><th>Tag</th><th>Meaning</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><code>n</code></td><td>Noun</td></tr>
+                                        <tr><td><code>nr</code></td><td>Person name</td></tr>
+                                        <tr><td><code>ns</code></td><td>Place name</td></tr>
+                                        <tr><td><code>nt</code></td><td>Organization</td></tr>
+                                        <tr><td><code>v</code></td><td>Verb</td></tr>
+                                        <tr><td><code>a</code></td><td>Adjective</td></tr>
+                                        <tr><td><code>d</code></td><td>Adverb</td></tr>
+                                        <tr><td><code>m</code></td><td>Number</td></tr>
+                                        <tr><td><code>q</code></td><td>Classifier</td></tr>
+                                        <tr><td><code>p</code></td><td>Preposition</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Dictionary Management</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Adding New Terms</h5>
+                            <div class="code-block">
+                                <pre><code># Add single term
+echo "新詞彙 50 n" >> config/custom_dict.txt
+
+# Add multiple terms from file
+cat new_terms.txt >> config/custom_dict.txt
+
+# Validate dictionary format
+python -c "
+import jieba
+jieba.load_userdict('config/custom_dict.txt')
+print('Dictionary loaded successfully')
+"</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Dictionary Best Practices</h5>
+                            <div class="alert alert-light">
+                                <ul class="mb-0">
+                                    <li>Use appropriate frequency values (1-100)</li>
+                                    <li>Higher frequency = higher segmentation priority</li>
+                                    <li>Include common variations of terms</li>
+                                    <li>Regular dictionary maintenance</li>
+                                    <li>Test with representative text samples</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Performance Note:</strong> Large dictionaries (>10,000 terms) may impact segmentation speed. Consider domain-specific dictionaries for better performance.
+                    </div>
+                </section>
+
+                <!-- Sentiment Configuration -->
+                <section id="sentiment-config" class="mb-5">
+                    <h2><i class="fas fa-heart text-primary"></i> Sentiment Configuration</h2>
+                    <p>Customize sentiment analysis by modifying positive and negative word lists.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Positive Words</h4>
+                            <p>Edit <code>config/positive_words.txt</code> to add positive sentiment indicators:</p>
+                            <div class="code-block">
+                                <pre><code># Positive sentiment words
+# One word per line
+
+好 # good
+棒 # great
+優秀 # excellent
+完美 # perfect
+成功 # success
+喜歡 # like
+愛 # love
+開心 # happy
+滿意 # satisfied
+讚 # praise
+推薦 # recommend
+值得 # worth
+精彩 # wonderful
+出色 # outstanding</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Negative Words</h4>
+                            <p>Edit <code>config/negative_words.txt</code> to add negative sentiment indicators:</p>
+                            <div class="code-block">
+                                <pre><code># Negative sentiment words
+# One word per line
+
+壞 # bad
+差 # poor
+失敗 # failure
+討厭 # hate
+生氣 # angry
+失望 # disappointed
+糟糕 # terrible
+可怕 # awful
+痛苦 # painful
+難過 # sad
+後悔 # regret
+擔心 # worry
+問題 # problem
+錯誤 # mistake</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Advanced Sentiment Configuration</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Weighted Sentiment Words</h5>
+                            <p>Create weighted sentiment files with scores:</p>
+                            <div class="code-block">
+                                <pre><code># Format: word:weight
+# config/weighted_positive.txt
+
+極好:3.0
+非常好:2.5
+很好:2.0
+好:1.5
+不錯:1.0
+還行:0.5
+
+# config/weighted_negative.txt
+
+極差:-3.0
+非常差:-2.5
+很差:-2.0
+差:-1.5
+不好:-1.0
+一般:-0.5</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Domain-Specific Sentiment</h5>
+                            <p>Create domain-specific sentiment dictionaries:</p>
+                            <div class="code-block">
+                                <pre><code># config/financial_sentiment.txt
+# Financial domain sentiment words
+
+盈利:positive
+虧損:negative
+增長:positive
+下跌:negative
+牛市:positive
+熊市:negative
+風險:negative
+穩定:positive
+收益:positive
+損失:negative</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stop Words -->
+                <section id="stopwords" class="mb-5">
+                    <h2><i class="fas fa-filter text-primary"></i> Stop Words Configuration</h2>
+                    <p>Customize the list of words to be filtered out during analysis to focus on meaningful content.</p>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Default Stop Words</h4>
+                            <p>The <code>config/chinese_stopwords.txt</code> file contains common Chinese stop words:</p>
+                            <div class="code-block">
+                                <pre><code># Common Chinese stop words
+的 # possessive particle
+了 # aspect particle
+在 # preposition "at/in"
+是 # verb "to be"
+我 # pronoun "I"
+有 # verb "to have"
+和 # conjunction "and"
+就 # adverb
+都 # adverb "all"
+而 # conjunction
+及 # conjunction
+與 # preposition "with"
+等 # particle "etc"
+這 # demonstrative "this"
+那 # demonstrative "that"
+什麼 # question word "what"
+如何 # question word "how"
+為什麼 # question phrase "why"</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Stop Word Categories</h4>
+                            <ul>
+                                <li><strong>Function words:</strong> 的, 了, 在, 是</li>
+                                <li><strong>Pronouns:</strong> 我, 你, 他, 她</li>
+                                <li><strong>Conjunctions:</strong> 和, 或, 但是</li>
+                                <li><strong>Prepositions:</strong> 在, 到, 从</li>
+                                <li><strong>Modal particles:</strong> 呢, 吧, 啊</li>
+                                <li><strong>Question words:</strong> 什么, 哪里, 怎么</li>
+                                <li><strong>Time words:</strong> 今天, 昨天, 明天</li>
+                                <li><strong>Numbers:</strong> 一, 二, 三</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Custom Stop Word Lists</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Domain-Specific Stop Words</h5>
+                            <div class="code-block">
+                                <pre><code># Create domain-specific stop word files
+
+# config/academic_stopwords.txt
+研究
+分析
+顯示
+表明
+認為
+提出
+發現
+方法
+結果
+結論
+
+# config/news_stopwords.txt
+記者
+報道
+據悉
+消息
+新聞
+媒體
+採訪
+報告
+發布
+宣布</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Dynamic Stop Word Management</h5>
+                            <div class="code-block">
+                                <pre><code># Python script to manage stop words
+import json
+
+def add_stopwords(new_words, stopword_file):
+    """Add new stop words to existing file"""
+    with open(stopword_file, 'a', encoding='utf-8') as f:
+        for word in new_words:
+            f.write(f"{word}\n")
+
+def remove_stopwords(remove_words, stopword_file):
+    """Remove stop words from file"""
+    with open(stopword_file, 'r', encoding='utf-8') as f:
+        words = f.read().splitlines()
+    
+    remaining = [w for w in words if w not in remove_words]
+    
+    with open(stopword_file, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(remaining))
+
+# Usage
+add_stopwords(['新詞1', '新詞2'], 'config/chinese_stopwords.txt')
+remove_stopwords(['舊詞1', '舊詞2'], 'config/chinese_stopwords.txt')</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Visualization Configuration -->
+                <section id="visualization-config" class="mb-5">
+                    <h2><i class="fas fa-palette text-primary"></i> Visualization Settings</h2>
+                    <p>Customize colors, themes, and visual styling for charts and word clouds.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Color Scheme Configuration</h4>
+                            <p>Edit <code>config/color_scheme.json</code> to customize visualization colors:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "themes": {
+    "default": {
+      "primary": "#3498db",
+      "secondary": "#2ecc71",
+      "accent": "#e74c3c",
+      "background": "#ecf0f1",
+      "text": "#2c3e50"
+    },
+    "dark": {
+      "primary": "#5dade2",
+      "secondary": "#58d68d",
+      "accent": "#ec7063",
+      "background": "#2c3e50",
+      "text": "#ecf0f1"
+    },
+    "colorful": {
+      "palette": [
+        "#ff6b6b", "#4ecdc4", "#45b7d1",
+        "#96ceb4", "#feca57", "#ff9ff3",
+        "#54a0ff", "#5f27cd", "#00d2d3",
+        "#ff9f43", "#10ac84", "#ee5a24"
+      ]
+    }
+  },
+  "wordcloud": {
+    "background_color": "white",
+    "max_words": 200,
+    "colormap": "viridis",
+    "font_path": "fonts/NotoSansCJK-Regular.ttc"
+  },
+  "charts": {
+    "figure_size": [12, 8],
+    "dpi": 300,
+    "style": "seaborn-v0_8",
+    "font_size": 12,
+    "title_size": 16
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Chart Customization</h4>
+                            <div class="alert alert-info">
+                                <h6><i class="fas fa-info-circle"></i> Available Chart Types</h6>
+                                <ul class="mb-0">
+                                    <li><strong>Word Frequency:</strong> Bar charts, pie charts</li>
+                                    <li><strong>POS Distribution:</strong> Donut charts, stacked bars</li>
+                                    <li><strong>Sentiment Analysis:</strong> Gauge charts, trends</li>
+                                    <li><strong>N-grams:</strong> Network graphs, treemaps</li>
+                                    <li><strong>Word Clouds:</strong> Circular, rectangular, custom shapes</li>
+                                </ul>
+                            </div>
+
+                            <h5>Custom Chart Settings</h5>
+                            <div class="code-block">
+                                <pre><code># Advanced chart configuration
+{
+  "word_frequency": {
+    "chart_type": "horizontal_bar",
+    "max_words": 20,
+    "color_gradient": true,
+    "show_percentages": true
+  },
+  "pos_distribution": {
+    "chart_type": "donut",
+    "explode_largest": true,
+    "show_labels": true
+  },
+  "sentiment": {
+    "chart_type": "gauge",
+    "color_ranges": {
+      "negative": "#e74c3c",
+      "neutral": "#f39c12",
+      "positive": "#27ae60"
+    }
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Font Configuration</h4>
+                    <p>Configure fonts for proper Chinese character display:</p>
+                    <div class="code-block">
+                        <pre><code># Font configuration in color_scheme.json
+{
+  "fonts": {
+    "chinese": {
+      "family": "Noto Sans CJK SC",
+      "path": "/System/Library/Fonts/STHeiti Light.ttc",
+      "fallbacks": [
+        "SimHei",
+        "Microsoft YaHei",
+        "WenQuanYi Micro Hei"
+      ]
+    },
+    "english": {
+      "family": "Arial",
+      "fallbacks": ["Helvetica", "sans-serif"]
+    }
+  }
+}</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
+
+                <!-- Entity Mappings -->
+                <section id="mappings" class="mb-5">
+                    <h2><i class="fas fa-exchange-alt text-primary"></i> Entity Mappings</h2>
+                    <p>Configure how different types of entities and linguistic features are categorized and displayed.</p>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Entity Type Mapping</h4>
+                            <p><code>config/mappings/entity_mapping.json</code>:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "PERSON": {
+    "display_name": "人物",
+    "color": "#3498db",
+    "icon": "👤"
+  },
+  "LOCATION": {
+    "display_name": "地點",
+    "color": "#2ecc71",
+    "icon": "📍"
+  },
+  "ORGANIZATION": {
+    "display_name": "機構",
+    "color": "#e74c3c",
+    "icon": "🏢"
+  },
+  "TIME": {
+    "display_name": "時間",
+    "color": "#f39c12",
+    "icon": "⏰"
+  },
+  "MONEY": {
+    "display_name": "金額",
+    "color": "#27ae60",
+    "icon": "💰"
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>POS Tag Mapping</h4>
+                            <p><code>config/mappings/pos_mapping.json</code>:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "n": {
+    "display_name": "名詞",
+    "category": "content_word",
+    "color": "#3498db"
+  },
+  "v": {
+    "display_name": "動詞",
+    "category": "content_word",
+    "color": "#e74c3c"
+  },
+  "a": {
+    "display_name": "形容詞",
+    "category": "content_word",
+    "color": "#2ecc71"
+  },
+  "nr": {
+    "display_name": "人名",
+    "category": "proper_noun",
+    "color": "#9b59b6"
+  },
+  "ns": {
+    "display_name": "地名",
+    "category": "proper_noun",
+    "color": "#f39c12"
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Sentiment Mapping</h4>
+                            <p><code>config/mappings/sentiment_mapping.json</code>:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "positive": {
+    "display_name": "積極",
+    "color": "#27ae60",
+    "icon": "😊",
+    "range": [0.1, 1.0]
+  },
+  "neutral": {
+    "display_name": "中性",
+    "color": "#95a5a6",
+    "icon": "😐",
+    "range": [-0.1, 0.1]
+  },
+  "negative": {
+    "display_name": "消極",
+    "color": "#e74c3c",
+    "icon": "😞",
+    "range": [-1.0, -0.1]
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Settings -->
+                <section id="performance" class="mb-5">
+                    <h2><i class="fas fa-tachometer-alt text-primary"></i> Performance Settings</h2>
+                    <p>Optimize analyzer performance for your hardware and use case requirements.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Memory Management</h4>
+                            <div class="code-block">
+                                <pre><code># Performance configuration
+{
+  "memory": {
+    "max_text_size": "50MB",
+    "chunk_size": 10000,
+    "cache_size": "500MB",
+    "gc_frequency": 1000
+  },
+  "processing": {
+    "max_workers": 4,
+    "timeout": 300,
+    "batch_size": 100,
+    "parallel_threshold": 1000
+  },
+  "optimization": {
+    "enable_caching": true,
+    "preload_models": true,
+    "use_multiprocessing": true,
+    "lazy_loading": false
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>GPU Configuration</h4>
+                            <div class="code-block">
+                                <pre><code># GPU settings (if available)
+{
+  "gpu": {
+    "enabled": false,
+    "device_id": 0,
+    "memory_limit": "2GB",
+    "allow_growth": true
+  },
+  "models": {
+    "bert_model": {
+      "use_gpu": true,
+      "batch_size": 32,
+      "max_length": 512
+    },
+    "ner_model": {
+      "use_gpu": true,
+      "batch_size": 16
+    }
+  }
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Performance Tips:</strong>
+                        <ul class="mb-0">
+                            <li>Enable caching for repeated analysis of similar texts</li>
+                            <li>Use appropriate chunk sizes for large documents</li>
+                            <li>Consider disabling advanced features for real-time applications</li>
+                            <li>Monitor memory usage with large batch operations</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Web Configuration -->
+                <section id="web-config" class="mb-5">
+                    <h2><i class="fas fa-globe text-primary"></i> Web Application Configuration</h2>
+                    <p>Configure the web interface settings, security, and deployment options.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Basic Web Settings</h4>
+                            <div class="code-block">
+                                <pre><code># web_config.py
+class Config:
+    SECRET_KEY = 'your-secret-key-here'
+    UPLOAD_FOLDER = 'data/uploads'
+    RESULTS_FOLDER = 'data/output/results'
+    MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
+    
+    # Database settings
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///analysis.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # Cache settings
+    CACHE_TYPE = 'simple'
+    CACHE_DEFAULT_TIMEOUT = 300
+    
+    # Security settings
+    WTF_CSRF_ENABLED = True
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Production Settings</h4>
+                            <div class="code-block">
+                                <pre><code># production_config.py
+class ProductionConfig(Config):
+    DEBUG = False
+    TESTING = False
+    
+    # Database for production
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    
+    # Redis for caching and sessions
+    CACHE_TYPE = 'redis'
+    CACHE_REDIS_URL = 'redis://localhost:6379/0'
+    SESSION_TYPE = 'redis'
+    SESSION_REDIS = redis.from_url('redis://localhost:6379/1')
+    
+    # Logging
+    LOG_LEVEL = 'WARNING'
+    LOG_FILE = '/var/log/chinese_analyzer.log'
+    
+    # Security
+    CSRF_ENABLED = True
+    SESSION_COOKIE_SECURE = True</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Environment Variables</h4>
+                    <div class="code-block">
+                        <pre><code># .env file for configuration
+FLASK_ENV=production
+SECRET_KEY=your-super-secret-key
+DATABASE_URL=postgresql://user:pass@localhost/chinese_analyzer
+REDIS_URL=redis://localhost:6379/0
+
+# Analysis settings
+MAX_TEXT_LENGTH=100000
+DEFAULT_LANGUAGE=zh-cn
+ENABLE_GPU=false
+
+# File upload settings
+UPLOAD_FOLDER=/app/data/uploads
+MAX_FILE_SIZE=50MB
+ALLOWED_EXTENSIONS=txt,docx,pdf,csv,json
+
+# Logging
+LOG_LEVEL=INFO
+LOG_FILE=/var/log/app.log</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+
+                    <h4>Deployment Configuration</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Nginx Configuration</h5>
+                            <div class="code-block">
+                                <pre><code># nginx.conf
+server {
+    listen 80;
+    server_name your-domain.com;
+    
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    
+    location /static {
+        alias /path/to/app/static;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    client_max_body_size 50M;
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Gunicorn Configuration</h5>
+                            <div class="code-block">
+                                <pre><code># gunicorn.conf.py
+bind = "127.0.0.1:5000"
+workers = 4
+worker_class = "sync"
+worker_connections = 1000
+timeout = 30
+keepalive = 2
+max_requests = 1000
+max_requests_jitter = 100
+user = "www-data"
+group = "www-data"
+tmp_upload_dir = None
+secure_scheme_headers = {
+    'X-FORWARDED-PROTOCOL': 'ssl',
+    'X-FORWARDED-PROTO': 'https',
+    'X-FORWARDED-SSL': 'on'
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Configuration Examples -->
+                <div class="alert alert-success">
+                    <h5><i class="fas fa-lightbulb"></i> Configuration Examples</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Academic Research Setup</h6>
+                            <ul class="small">
+                                <li>Enhanced academic dictionary</li>
+                                <li>Detailed POS tagging</li>
+                                <li>Academic-specific stop words</li>
+                                <li>High-resolution visualizations</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Social Media Analysis</h6>
+                            <ul class="small">
+                                <li>Internet slang dictionary</li>
+                                <li>Emotion-focused sentiment</li>
+                                <li>Minimal stop words</li>
+                                <li>Colorful visualizations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mb-0 mt-2">
+                        <strong>Next:</strong> Explore <a href="api.html">API Documentation</a> to integrate the analyzer into your applications.
+                    </p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="docs-common.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="api.html">API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="troubleshooting.html">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container docs-container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="docs-sidebar">
+                    <h6 class="text-primary">API Documentation</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#endpoints">API Endpoints</a></li>
+                        <li><a href="#examples">Code Examples</a></li>
+                        <li><a href="#authentication">Authentication</a></li>
+                        <li><a href="#rate-limits">Rate Limits</a></li>
+                        <li><a href="#error-handling">Error Handling</a></li>
+                    </ul>
+                    
+                    <hr>
+                    <h6 class="text-muted">Other Sections</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="quick-start.html">Quick Start</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="usage.html">Usage Guide</a></li>
+                        <li><a href="configuration.html">Configuration</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="docs-header">
+                    <h1><i class="fas fa-code text-primary"></i> API Documentation</h1>
+                    <p class="lead">Complete REST API reference for the Chinese Text Analyzer</p>
+                </div>
+
+                <!-- API Overview -->
+                <section id="overview">
+                    <h2 class="section-title">📊 API Overview</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Base URL:</strong> <code>http://localhost:3000</code>
+                    </div>
+
+                    <p>The Chinese Text Analyzer provides a comprehensive RESTful API for programmatic access to both basic and advanced text analysis features.</p>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-check-circle text-success"></i> API Features</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li>✓ 10+ RESTful endpoints</li>
+                                        <li>✓ JSON request/response format</li>
+                                        <li>✓ File upload support</li>
+                                        <li>✓ Batch processing</li>
+                                        <li>✓ Real-time analysis</li>
+                                        <li>✓ Cross-platform integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-rocket text-warning"></i> Quick Test</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Test the API with a simple curl command:</p>
+                                    <div class="code-block">
+                                        <code>
+                                            curl -X POST http://localhost:3000/api/analyze \<br>
+                                            &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
+                                            &nbsp;&nbsp;-d '{"text": "這是一個測試"}'
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- API Endpoints -->
+                <section id="endpoints">
+                    <h2 class="section-title">🔗 API Endpoints</h2>
+
+                    <h4>Core Analysis Endpoints</h4>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/analyze</h5>
+                        <p><strong>Description:</strong> Analyze Chinese text and return comprehensive analysis results.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "您要分析的中文文本",<br>
+                                &nbsp;&nbsp;"advanced_viz": ["pie", "vertical", "length"]  // optional<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"analysis_id": "unique-analysis-id",<br>
+                                &nbsp;&nbsp;"word_frequency": {...},<br>
+                                &nbsp;&nbsp;"pos_distribution": {...},<br>
+                                &nbsp;&nbsp;"sentiment": {...},<br>
+                                &nbsp;&nbsp;"entities": {...},<br>
+                                &nbsp;&nbsp;"keywords": {...},<br>
+                                &nbsp;&nbsp;"ngrams": {...},<br>
+                                &nbsp;&nbsp;"visualizations": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"wordcloud": "/static/results/.../wordcloud.png",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"word_frequency": "/static/results/.../word_freq.png"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/convert</h5>
+                        <p><strong>Description:</strong> Convert text between Traditional and Simplified Chinese.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "要轉換的中文文本",<br>
+                                &nbsp;&nbsp;"conversion_type": "s2t"  // "s2t" or "t2s"<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">🆕 Advanced Analysis Endpoints</h4>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #e74c3c;">
+                        <h5><span class="badge bg-danger">POST</span> /api/similarity/analyze</h5>
+                        <p><strong>Description:</strong> Perform multi-text similarity analysis with semantic comparison.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"texts": [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第一個文本內容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第二個文本內容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第三個文本內容"<br>
+                                &nbsp;&nbsp;],<br>
+                                &nbsp;&nbsp;"algorithms": ["semantic", "tfidf", "jaccard"]  // optional<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #f39c12;">
+                        <h5><span class="badge bg-warning">POST</span> /api/file/upload</h5>
+                        <p><strong>Description:</strong> Upload and parse various file formats (PDF, DOCX, HTML, Markdown, CSV, JSON).</p>
+                        
+                        <h6>Request (Multipart Form):</h6>
+                        <div class="code-block">
+                            <code>
+                                Content-Type: multipart/form-data<br>
+                                file: [binary file data]
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">Task Queue & System Endpoints</h4>
+
+                    <div class="api-endpoint" style="border-left: 4px solid #27ae60;">
+                        <h5><span class="badge bg-success">POST</span> /api/tasks/create</h5>
+                        <p><strong>Description:</strong> Create background analysis tasks for batch processing.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"task_type": "batch_analysis",<br>
+                                &nbsp;&nbsp;"texts": ["文本1", "文本2", ...],<br>
+                                &nbsp;&nbsp;"options": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"include_similarity": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"generate_interactive": true<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-info">GET</span> /api/system/capabilities</h5>
+                        <p><strong>Description:</strong> Check available system features and supported formats.</p>
+                        
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"similarity_analysis": true,<br>
+                                &nbsp;&nbsp;"advanced_visualization": true,<br>
+                                &nbsp;&nbsp;"task_queue": true,<br>
+                                &nbsp;&nbsp;"file_parsing": true,<br>
+                                &nbsp;&nbsp;"gpu_acceleration": false,<br>
+                                &nbsp;&nbsp;"supported_formats": ["pdf", "docx", "html", "md", "csv", "json"]<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">Report Generation</h4>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/generate_report</h5>
+                        <p><strong>Description:</strong> Generate comprehensive analysis reports with advanced features.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "原始分析文本",<br>
+                                &nbsp;&nbsp;"options": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"basic": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"advanced": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"title": "自定義報告標題"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Code Examples -->
+                <section id="examples">
+                    <h2 class="section-title">💻 Code Examples</h2>
+
+                    <h4>🐍 Python Examples</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-python text-primary"></i> Basic Text Analysis</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            import requests<br>
+                                            import json<br><br>
+                                            
+                                            # API endpoint<br>
+                                            url = "http://localhost:3000/api/analyze"<br><br>
+                                            
+                                            # Request data<br>
+                                            data = {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"text": "現代科技改變了人們的生活方式",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"advanced_viz": ["pie", "vertical"]<br>
+                                            }<br><br>
+                                            
+                                            # Make request<br>
+                                            response = requests.post(url, json=data)<br><br>
+                                            
+                                            if response.status_code == 200:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;result = response.json()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Analysis ID:", result['analysis_id'])<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Word Frequency:", result['word_frequency'])<br>
+                                            else:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Error:", response.text)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-python text-success"></i> Text Similarity Analysis</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            import requests<br><br>
+                                            
+                                            url = "http://localhost:3000/api/similarity/analyze"<br><br>
+                                            
+                                            data = {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"texts": [<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"人工智慧發展迅速",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"機器學習技術進步",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"自然語言處理應用"<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;],<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"algorithms": ["semantic", "tfidf"]<br>
+                                            }<br><br>
+                                            
+                                            response = requests.post(url, json=data)<br>
+                                            result = response.json()<br><br>
+                                            
+                                            # Access similarity matrix<br>
+                                            similarity_matrix = result['similarities']['semantic']<br>
+                                            print("Semantic similarities:", similarity_matrix)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🌐 JavaScript Examples</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-js-square text-warning"></i> Frontend Integration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            // Fetch API example<br>
+                                            async function analyzeText(text) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;try {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const response = await fetch('http://localhost:3000/api/analyze', {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method: 'POST',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Content-Type': 'application/json',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body: JSON.stringify({<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: text,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advanced_viz: ["pie", "vertical"]<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const result = await response.json();<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('Analysis completed:', result.analysis_id);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;} catch (error) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.error('Analysis failed:', error);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            }<br><br>
+                                            
+                                            // Usage<br>
+                                            analyzeText("這是一個測試文本");
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-node-js text-success"></i> Node.js Backend</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            const axios = require('axios');<br><br>
+                                            
+                                            class ChineseTextAnalyzer {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;constructor(baseURL = 'http://localhost:3000') {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.baseURL = baseURL;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;async analyze(text, options = {}) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.post(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`${this.baseURL}/api/analyze`,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ text, ...options }<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.data;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (error) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new Error(`Analysis failed: ${error.message}`);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            }<br><br>
+                                            
+                                            // Usage<br>
+                                            const analyzer = new ChineseTextAnalyzer();<br>
+                                            analyzer.analyze("測試文本").then(console.log);
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>☕ Java Example</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6><i class="fab fa-java text-danger"></i> Java Integration</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    import java.net.http.HttpClient;<br>
+                                    import java.net.http.HttpRequest;<br>
+                                    import java.net.http.HttpResponse;<br>
+                                    import java.net.URI;<br>
+                                    import java.time.Duration;<br><br>
+                                    
+                                    public class ChineseTextAnalyzer {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;private final HttpClient client;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;private final String baseUrl;<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;public ChineseTextAnalyzer(String baseUrl) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.baseUrl = baseUrl;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.client = HttpClient.newBuilder()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.connectTimeout(Duration.ofSeconds(10))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;public String analyzeText(String text) throws Exception {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String json = String.format(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"{\"text\":\"%s\",\"advanced_viz\":[\"pie\",\"vertical\"]}", <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text.replace("\"", "\\\""))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpRequest request = HttpRequest.newBuilder()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.uri(URI.create(baseUrl + "/api/analyze"))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.header("Content-Type", "application/json")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.POST(HttpRequest.BodyPublishers.ofString(json))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpResponse&lt;String&gt; response = client.send(request,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpResponse.BodyHandlers.ofString());<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.body();<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    }
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Authentication -->
+                <section id="authentication">
+                    <h2 class="section-title">🔐 Authentication</h2>
+                    
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-unlock"></i> No Authentication Required</h5>
+                        <p class="mb-0">The current API does not require authentication for local development. For production deployments, consider implementing authentication based on your security requirements.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Production Security Recommendations</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>API Keys:</strong> Implement API key authentication for external access</li>
+                                <li><strong>Rate Limiting:</strong> Configure per-client rate limits</li>
+                                <li><strong>HTTPS:</strong> Use HTTPS in production environments</li>
+                                <li><strong>CORS:</strong> Configure CORS policies for web clients</li>
+                                <li><strong>Input Validation:</strong> Validate all input parameters</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Rate Limits -->
+                <section id="rate-limits">
+                    <h2 class="section-title">⏱️ Rate Limits</h2>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-tachometer-alt text-primary"></i> Current Limits</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="requirement-item">
+                                        <strong>Requests per Minute:</strong> 100 per IP address
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>File Upload Size:</strong> 10MB maximum
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Batch Text Limit:</strong> 50 texts per similarity analysis
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Concurrent Requests:</strong> Limited by server resources
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-info-circle text-info"></i> Rate Limit Headers</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            X-RateLimit-Limit: 100<br>
+                                            X-RateLimit-Remaining: 95<br>
+                                            X-RateLimit-Reset: 1234567890<br>
+                                            Retry-After: 60
+                                        </code>
+                                    </div>
+                                    <small class="text-muted">Headers included in API responses when rate limiting is active</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Error Handling -->
+                <section id="error-handling">
+                    <h2 class="section-title">🚨 Error Handling</h2>
+                    
+                    <h4>HTTP Status Codes</h4>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6><span class="badge bg-success">200</span> Success</h6>
+                                    <p class="small mb-0">Request completed successfully</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6><span class="badge bg-warning">400</span> Bad Request</h6>
+                                    <p class="small mb-0">Invalid request parameters</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6><span class="badge bg-danger">429</span> Too Many Requests</h6>
+                                    <p class="small mb-0">Rate limit exceeded</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6><span class="badge bg-secondary">500</span> Server Error</h6>
+                                    <p class="small mb-0">Internal server error</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Error Response Format</h4>
+                    <div class="code-block">
+                        <code>
+                            {<br>
+                            &nbsp;&nbsp;"success": false,<br>
+                            &nbsp;&nbsp;"error": "Error message description",<br>
+                            &nbsp;&nbsp;"error_code": "INVALID_INPUT",<br>
+                            &nbsp;&nbsp;"details": {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"field": "text",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"message": "Text field is required"<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </code>
+                    </div>
+
+                    <h4 class="mt-4">Retry Strategy</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    # Python retry example with exponential backoff<br>
+                                    import time<br>
+                                    import requests<br><br>
+                                    
+                                    def api_call_with_retry(url, data, max_retries=3):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;for attempt in range(max_retries):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.post(url, json=data, timeout=30)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.raise_for_status()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.json()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except requests.exceptions.RequestException as e:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if attempt == max_retries - 1:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(2 ** attempt)  # Exponential backoff
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <div class="docs-navigation">
+                    <a href="features.html" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left"></i> Features
+                    </a>
+                    <a href="troubleshooting.html" class="btn btn-primary">
+                        Next: Troubleshooting <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 

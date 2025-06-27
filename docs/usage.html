@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage Guide - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="docs-common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="usage.html">Usage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="configuration.html">Configuration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="api.html">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        使用指南
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#web-interface">
+                                <i class="fas fa-globe"></i> 網頁介面
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#file-upload">
+                                <i class="fas fa-upload"></i> 檔案上傳
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#text-input">
+                                <i class="fas fa-keyboard"></i> 文字輸入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#results-dashboard">
+                                <i class="fas fa-chart-pie"></i> 結果儀表板
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#cli-interface">
+                                <i class="fas fa-terminal"></i> 命令列介面
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#batch-processing">
+                                <i class="fas fa-layer-group"></i> 批次處理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#output-formats">
+                                <i class="fas fa-file-export"></i> 輸出格式
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#advanced-options">
+                                <i class="fas fa-cogs"></i> 進階選項
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="fas fa-book-open text-primary"></i> 使用指南
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="quick-start.html" class="btn btn-sm btn-outline-secondary">← Quick Start</a>
+                            <a href="configuration.html" class="btn btn-sm btn-outline-secondary">Configuration →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Usage Overview:</strong> This guide covers both web interface and command-line usage patterns. Choose the method that best fits your workflow.
+                </div>
+
+                <!-- Web Interface -->
+                <section id="web-interface" class="mb-5">
+                    <h2><i class="fas fa-globe text-primary"></i> 網頁介面</h2>
+                    <p>The web interface provides an intuitive way to analyze Chinese text with real-time results and interactive visualizations.</p>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4>Starting the Web Server</h4>
+                            <div class="code-block">
+                                <pre><code># Start the web application
+python run_web.py
+
+# Or with custom settings
+python run_web.py --host 0.0.0.0 --port 8080 --debug</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Accessing the Interface</h4>
+                            <p>Once started, access the web interface at:</p>
+                            <ul>
+                                <li><strong>Local:</strong> <code>http://localhost:5000</code></li>
+                                <li><strong>Network:</strong> <code>http://your-ip:5000</code></li>
+                                <li><strong>Production:</strong> Configure with nginx/apache</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Production Note:</strong> For production deployment, use a WSGI server like Gunicorn and configure proper security settings.
+                    </div>
+                </section>
+
+                <!-- File Upload -->
+                <section id="file-upload" class="mb-5">
+                    <h2><i class="fas fa-upload text-primary"></i> File Upload</h2>
+                    <p>Upload and analyze various file formats containing Chinese text.</p>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Supported File Formats</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Format</th>
+                                            <th>Extension</th>
+                                            <th>Max Size</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Plain Text</td>
+                                            <td>.txt</td>
+                                            <td>10MB</td>
+                                            <td>UTF-8 encoding recommended</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microsoft Word</td>
+                                            <td>.docx</td>
+                                            <td>20MB</td>
+                                            <td>Extracts text content only</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PDF</td>
+                                            <td>.pdf</td>
+                                            <td>50MB</td>
+                                            <td>Text-based PDFs only</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CSV</td>
+                                            <td>.csv</td>
+                                            <td>25MB</td>
+                                            <td>Specify text column</td>
+                                        </tr>
+                                        <tr>
+                                            <td>JSON</td>
+                                            <td>.json</td>
+                                            <td>15MB</td>
+                                            <td>Specify text field path</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Upload Steps</h4>
+                            <div class="step-list">
+                                <div class="step">
+                                    <span class="step-number">1</span>
+                                    <span class="step-text">Click "Choose File" button</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">2</span>
+                                    <span class="step-text">Select your file</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">3</span>
+                                    <span class="step-text">Configure analysis options</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">4</span>
+                                    <span class="step-text">Click "Analyze Text"</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">5</span>
+                                    <span class="step-text">View results dashboard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Advanced Upload Options</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Encoding Detection</h5>
+                            <p>The system automatically detects file encoding, but you can specify:</p>
+                            <ul>
+                                <li><strong>UTF-8:</strong> Default and recommended</li>
+                                <li><strong>GB2312:</strong> Simplified Chinese</li>
+                                <li><strong>Big5:</strong> Traditional Chinese</li>
+                                <li><strong>GBK:</strong> Extended GB2312</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Text Extraction Options</h5>
+                            <ul>
+                                <li><strong>Clean HTML:</strong> Remove HTML tags</li>
+                                <li><strong>Remove URLs:</strong> Filter out web addresses</li>
+                                <li><strong>Normalize Whitespace:</strong> Standardize spacing</li>
+                                <li><strong>Keep Line Breaks:</strong> Preserve formatting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Text Input -->
+                <section id="text-input" class="mb-5">
+                    <h2><i class="fas fa-keyboard text-primary"></i> Direct Text Input</h2>
+                    <p>Analyze Chinese text directly through the web interface textarea.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Text Input Features</h4>
+                            <ul>
+                                <li><strong>Real-time character count</strong></li>
+                                <li><strong>Auto-save drafts</strong> (localStorage)</li>
+                                <li><strong>Paste detection</strong> with encoding conversion</li>
+                                <li><strong>Text formatting</strong> options</li>
+                                <li><strong>Sample text</strong> loading</li>
+                            </ul>
+
+                            <h4>Input Limits</h4>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tr><td>Maximum characters:</td><td>100,000</td></tr>
+                                    <tr><td>Recommended range:</td><td>500 - 10,000</td></tr>
+                                    <tr><td>Minimum for analysis:</td><td>10 characters</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Input Best Practices</h4>
+                            <div class="alert alert-light">
+                                <h6><i class="fas fa-lightbulb"></i> Tips for Better Results</h6>
+                                <ul class="mb-0">
+                                    <li>Use clean, well-formatted text</li>
+                                    <li>Remove excessive punctuation</li>
+                                    <li>Ensure proper Chinese encoding</li>
+                                    <li>Consider text length for processing time</li>
+                                    <li>Use representative text samples</li>
+                                </ul>
+                            </div>
+
+                            <h5>Supported Text Types</h5>
+                            <ul>
+                                <li>📰 News articles</li>
+                                <li>📚 Literature excerpts</li>
+                                <li>💬 Social media posts</li>
+                                <li>📧 Email content</li>
+                                <li>📄 Academic papers</li>
+                                <li>🎭 Creative writing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Dashboard -->
+                <section id="results-dashboard" class="mb-5">
+                    <h2><i class="fas fa-chart-pie text-primary"></i> Results Dashboard</h2>
+                    <p>Navigate and understand the comprehensive analysis results interface.</p>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Analysis Tabs</h4>
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-chart-bar"></i> Basic Statistics</h6>
+                                    <small>Character, word, sentence counts</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-tags"></i> Word Segmentation</h6>
+                                    <small>Tokenized words with frequencies</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-language"></i> POS Tagging</h6>
+                                    <small>Part-of-speech analysis</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-heart"></i> Sentiment Analysis</h6>
+                                    <small>Emotional tone detection</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-key"></i> Keywords</h6>
+                                    <small>Most important terms</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6><i class="fas fa-search"></i> Named Entities</h6>
+                                    <small>People, places, organizations</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>Interactive Features</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Visualization Controls</h5>
+                                    <ul>
+                                        <li><strong>Chart Types:</strong> Bar, pie, line, scatter</li>
+                                        <li><strong>Data Filtering:</strong> Frequency thresholds</li>
+                                        <li><strong>Color Schemes:</strong> Multiple themes</li>
+                                        <li><strong>Export Options:</strong> PNG, SVG, PDF</li>
+                                        <li><strong>Zoom & Pan:</strong> Interactive exploration</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Data Export</h5>
+                                    <ul>
+                                        <li><strong>JSON:</strong> Complete analysis data</li>
+                                        <li><strong>CSV:</strong> Tabular data export</li>
+                                        <li><strong>Excel:</strong> Formatted spreadsheet</li>
+                                        <li><strong>Word Cloud:</strong> High-resolution images</li>
+                                        <li><strong>Report:</strong> PDF summary report</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h4>Real-time Updates</h4>
+                            <p>The dashboard provides real-time updates during analysis:</p>
+                            <div class="alert alert-info">
+                                <ul class="mb-0">
+                                    <li><strong>Progress Indicators:</strong> Shows analysis completion</li>
+                                    <li><strong>Live Charts:</strong> Updates as analysis progresses</li>
+                                    <li><strong>Error Handling:</strong> Clear error messages</li>
+                                    <li><strong>Performance Metrics:</strong> Processing time display</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CLI Interface -->
+                <section id="cli-interface" class="mb-5">
+                    <h2><i class="fas fa-terminal text-primary"></i> Command Line Interface</h2>
+                    <p>Use the powerful CLI for batch processing, automation, and integration into workflows.</p>
+
+                    <h4>Basic CLI Usage</h4>
+                    <div class="code-block">
+                        <pre><code># Basic analysis
+python run_cli.py --file input.txt
+
+# With output specification
+python run_cli.py --file input.txt --output results.json
+
+# Multiple files
+python run_cli.py --file file1.txt file2.txt file3.txt
+
+# Directory processing
+python run_cli.py --directory ./text_files/ --recursive</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+
+                    <h4>CLI Options Reference</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Input Options</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tr><td><code>--file, -f</code></td><td>Input file(s)</td></tr>
+                                    <tr><td><code>--directory, -d</code></td><td>Input directory</td></tr>
+                                    <tr><td><code>--text, -t</code></td><td>Direct text input</td></tr>
+                                    <tr><td><code>--encoding</code></td><td>File encoding (default: utf-8)</td></tr>
+                                    <tr><td><code>--recursive</code></td><td>Process subdirectories</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Output Options</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tr><td><code>--output, -o</code></td><td>Output file path</td></tr>
+                                    <tr><td><code>--format</code></td><td>Output format (json/csv/txt)</td></tr>
+                                    <tr><td><code>--visualize</code></td><td>Generate visualizations</td></tr>
+                                    <tr><td><code>--no-stats</code></td><td>Skip basic statistics</td></tr>
+                                    <tr><td><code>--quiet, -q</code></td><td>Suppress output messages</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Advanced CLI Examples</h4>
+                    <div class="code-block">
+                        <pre><code># Custom analysis with specific features
+python run_cli.py --file news.txt \
+    --output analysis.json \
+    --visualize \
+    --sentiment \
+    --entities \
+    --keywords 20
+
+# Batch processing with configuration
+python run_cli.py --directory ./corpus/ \
+    --recursive \
+    --config custom_config.json \
+    --output-dir ./results/ \
+    --format csv
+
+# Pipeline processing
+python run_cli.py --file input.txt | \
+    python post_process.py | \
+    python generate_report.py</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
+
+                <!-- Batch Processing -->
+                <section id="batch-processing" class="mb-5">
+                    <h2><i class="fas fa-layer-group text-primary"></i> Batch Processing</h2>
+                    <p>Process multiple files efficiently with batch operations and parallel processing.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Batch Scripts</h4>
+                            <div class="code-block">
+                                <pre><code># Process all .txt files in directory
+find ./documents -name "*.txt" -exec \
+    python run_cli.py --file {} \
+    --output ./results/{}.json \;
+
+# Parallel processing with GNU parallel
+ls *.txt | parallel -j 4 \
+    python run_cli.py --file {} \
+    --output results/{.}.json
+
+# Batch with shell script
+#!/bin/bash
+for file in ./input/*.txt; do
+    echo "Processing $file"
+    python run_cli.py --file "$file" \
+        --output "./output/$(basename "$file" .txt).json"
+done</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Performance Tips</h4>
+                            <div class="alert alert-warning">
+                                <h6><i class="fas fa-rocket"></i> Optimization Tips</h6>
+                                <ul class="mb-0">
+                                    <li>Use <code>--parallel</code> for multiple cores</li>
+                                    <li>Set appropriate <code>--batch-size</code></li>
+                                    <li>Use <code>--cache</code> for repeated operations</li>
+                                    <li>Consider <code>--memory-limit</code> for large files</li>
+                                    <li>Enable <code>--progress</code> for monitoring</li>
+                                </ul>
+                            </div>
+
+                            <h5>Monitoring Progress</h5>
+                            <div class="code-block">
+                                <pre><code># Progress monitoring
+python run_cli.py --directory ./large_corpus/ \
+    --progress \
+    --log-level INFO \
+    --log-file batch.log</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Output Formats -->
+                <section id="output-formats" class="mb-5">
+                    <h2><i class="fas fa-file-export text-primary"></i> Output Formats</h2>
+                    <p>Choose from various output formats to suit your analysis needs.</p>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>JSON Format</h4>
+                            <p>Complete structured data output</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "basic_stats": {
+    "character_count": 1250,
+    "word_count": 423,
+    "sentence_count": 28
+  },
+  "segmentation": [...],
+  "pos_tags": [...],
+  "sentiment": {
+    "polarity": 0.3,
+    "confidence": 0.85
+  },
+  "keywords": [...],
+  "entities": [...]
+}</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>CSV Format</h4>
+                            <p>Tabular data for spreadsheet analysis</p>
+                            <div class="code-block">
+                                <pre><code>word,frequency,pos_tag,sentiment
+中国,15,NR,neutral
+发展,12,VV,positive
+经济,10,NN,neutral
+...</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>TXT Format</h4>
+                            <p>Human-readable summary report</p>
+                            <div class="code-block">
+                                <pre><code>=== Chinese Text Analysis Report ===
+
+Basic Statistics:
+- Characters: 1,250
+- Words: 423
+- Sentences: 28
+
+Top Keywords:
+1. 中国 (15 occurrences)
+2. 发展 (12 occurrences)
+...</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Custom Output Templates</h4>
+                    <p>Create custom output formats using templates:</p>
+                    <div class="code-block">
+                        <pre><code># Use custom template
+python run_cli.py --file input.txt \
+    --template custom_template.jinja2 \
+    --output report.html
+
+# Available template variables:
+# {{basic_stats}}, {{segmentation}}, {{pos_tags}}, 
+# {{sentiment}}, {{keywords}}, {{entities}}</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
+
+                <!-- Advanced Options -->
+                <section id="advanced-options" class="mb-5">
+                    <h2><i class="fas fa-cogs text-primary"></i> Advanced Options</h2>
+                    <p>Fine-tune analysis behavior with advanced configuration options.</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Analysis Configuration</h4>
+                            <div class="code-block">
+                                <pre><code># Custom dictionary
+python run_cli.py --file input.txt \
+    --dict-file custom_dict.txt \
+    --stopwords custom_stopwords.txt
+
+# Sentiment configuration
+python run_cli.py --file input.txt \
+    --positive-words pos_words.txt \
+    --negative-words neg_words.txt \
+    --sentiment-threshold 0.6
+
+# NER configuration
+python run_cli.py --file input.txt \
+    --ner-model custom_ner_model \
+    --entity-types PER,LOC,ORG</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Performance Tuning</h4>
+                            <div class="code-block">
+                                <pre><code># Memory optimization
+python run_cli.py --file large_file.txt \
+    --chunk-size 1000 \
+    --memory-limit 2GB \
+    --cache-size 500MB
+
+# Parallel processing
+python run_cli.py --directory ./files/ \
+    --parallel 4 \
+    --batch-size 10 \
+    --timeout 300
+
+# GPU acceleration (if available)
+python run_cli.py --file input.txt \
+    --use-gpu \
+    --gpu-memory 1GB</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Integration Options</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Database Integration</h5>
+                            <div class="code-block">
+                                <pre><code># Save to database
+python run_cli.py --file input.txt \
+    --db-url postgresql://user:pass@host/db \
+    --table-name analysis_results
+
+# MongoDB export
+python run_cli.py --file input.txt \
+    --mongo-url mongodb://localhost:27017 \
+    --collection text_analysis</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>API Integration</h5>
+                            <div class="code-block">
+                                <pre><code># Webhook notifications
+python run_cli.py --file input.txt \
+    --webhook-url https://api.example.com/notify \
+    --webhook-events complete,error
+
+# API export
+python run_cli.py --file input.txt \
+    --api-endpoint https://api.example.com/results \
+    --api-key your_api_key</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Next Steps -->
+                <div class="alert alert-success">
+                    <h5><i class="fas fa-arrow-right"></i> Next Steps</h5>
+                    <p>Now that you understand how to use the Chinese Text Analyzer, explore these related topics:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li><a href="configuration.html">Configuration Guide</a> - Customize analysis settings</li>
+                                <li><a href="api.html">API Documentation</a> - Integrate with your applications</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li><a href="ml-development.html">ML Development</a> - Extend with custom models</li>
+                                <li><a href="troubleshooting.html">Troubleshooting</a> - Solve common issues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 

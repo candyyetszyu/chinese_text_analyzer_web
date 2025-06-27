@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="docs-common.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="api.html">API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="troubleshooting.html">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container docs-container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="docs-sidebar">
+                    <h6 class="text-primary">Quick Start Guide</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#checklist">Quick Checklist</a></li>
+                        <li><a href="#requirements">System Requirements</a></li>
+                        <li><a href="#installation">Installation</a></li>
+                        <li><a href="#first-run">First Run</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </ul>
+                    
+                    <hr>
+                    <h6 class="text-muted">Other Sections</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="usage.html">Usage Guide</a></li>
+                        <li><a href="api.html">API Docs</a></li>
+                        <li><a href="configuration.html">Configuration</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="docs-header">
+                    <h1><i class="fas fa-rocket text-primary"></i> Quick Start Guide</h1>
+                    <p class="lead">Get the Chinese Text Analyzer up and running in 5 minutes!</p>
+                </div>
+
+                <!-- Quick Start Checklist -->
+                <section id="checklist">
+                    <h2 class="section-title">✅ Quick Start Checklist</h2>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="mb-3">Follow this checklist to get up and running quickly:</p>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check1">
+                                    <label class="form-check-label" for="check1">
+                                        <strong>Python 3.8+</strong> installed on your system
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check2">
+                                    <label class="form-check-label" for="check2">
+                                        Clone repository: <code>git clone &lt;repository-url&gt;</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check3">
+                                    <label class="form-check-label" for="check3">
+                                        Run setup: <code>python setup.py</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check4">
+                                    <label class="form-check-label" for="check4">
+                                        Activate virtual environment: <code>source venv/bin/activate</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check5">
+                                    <label class="form-check-label" for="check5">
+                                        Start application: <code>python run_web.py</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check6">
+                                    <label class="form-check-label" for="check6">
+                                        Open browser: <code>http://localhost:3000</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-success mt-3">
+                                <i class="fas fa-rocket"></i> <strong>Ready!</strong> You should now see the Chinese Text Analyzer interface.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Requirements -->
+                <section id="requirements">
+                    <h2 class="section-title">💻 System Requirements</h2>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-desktop"></i> Minimum Requirements</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="requirement-item">
+                                        <strong>Python:</strong> 3.8 or higher
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>RAM:</strong> 2GB minimum, 4GB recommended
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Storage:</strong> 1GB free space
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>OS:</strong> Windows 10+, macOS 10.14+, Ubuntu 18.04+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-rocket"></i> Recommended for Advanced Features</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="requirement-item">
+                                        <strong>RAM:</strong> 8GB+ for large text processing
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>GPU:</strong> CUDA-compatible for GPU acceleration
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Redis:</strong> For task queue functionality
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Multi-core CPU:</strong> For parallel processing
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <h6><i class="fas fa-info-circle"></i> Platform-Specific Notes</h6>
+                        <ul class="mb-0">
+                            <li><strong>Windows:</strong> Use WSL2 for best compatibility</li>
+                            <li><strong>macOS:</strong> Install Xcode Command Line Tools</li>
+                            <li><strong>Linux:</strong> Install build-essential package</li>
+                            <li><strong>Docker:</strong> Supported via containerization</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Installation -->
+                <section id="installation">
+                    <h2 class="section-title">🛠️ Installation</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Requirements:</strong> Python 3.8+ and pip package manager
+                    </div>
+
+                    <h4>Quick Setup (Recommended)</h4>
+                    
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 1: Clone the Repository</h6>
+                        <div class="code-block">
+                            <code>
+                                git clone &lt;repository-url&gt;<br>
+                                cd chinese_text_analyzer_web
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 2: Run Setup Script</h6>
+                        <div class="code-block">
+                            <code>python setup.py</code>
+                        </div>
+                        <small class="text-muted">This creates virtual environment and installs all dependencies</small>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 3: Activate Virtual Environment</h6>
+                        <div class="code-block">
+                            <code>
+                                # On macOS/Linux:<br>
+                                source venv/bin/activate<br><br>
+                                # On Windows:<br>
+                                venv\Scripts\activate
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="installation-step">
+                        <h6><i class="fas fa-step-forward"></i> Step 4: Run the Application</h6>
+                        <div class="code-block">
+                            <code>
+                                # Web interface:<br>
+                                python run_web.py<br><br>
+                                # CLI interface:<br>
+                                python run_cli.py
+                            </code>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">Manual Setup</h4>
+                    <p>If you prefer manual installation:</p>
+                    
+                    <div class="code-block">
+                        <code>
+                            # Create virtual environment<br>
+                            python3 -m venv venv<br>
+                            source venv/bin/activate  # On Windows: venv\Scripts\activate<br><br>
+                            
+                            # Install dependencies<br>
+                            pip install --upgrade pip<br>
+                            pip install -r requirements.txt<br><br>
+                            
+                            # Create necessary directories<br>
+                            mkdir -p data/input data/output/uploads src/web/static/results logs
+                        </code>
+                    </div>
+                </section>
+
+                <!-- First Run -->
+                <section id="first-run">
+                    <h2 class="section-title">🎯 First Run</h2>
+                    
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-play-circle"></i> Let's test your installation!</h5>
+                    </div>
+
+                    <h4>Starting the Web Interface</h4>
+                    <ol>
+                        <li><strong>Start the web server:</strong>
+                            <div class="code-block"><code>python run_web.py</code></div>
+                        </li>
+                        <li><strong>Open your browser and navigate to:</strong>
+                            <div class="code-block"><code>http://localhost:3000</code></div>
+                        </li>
+                        <li><strong>Test with sample text:</strong>
+                            <div class="code-block chinese-text"><code>現代科技改變了人們的生活方式，人工智慧發展迅速。</code></div>
+                        </li>
+                        <li><strong>Click "分析文本" (Analyze Text)</strong></li>
+                    </ol>
+
+                    <h4>Testing the CLI Interface</h4>
+                    <ol>
+                        <li><strong>Start the CLI:</strong>
+                            <div class="code-block"><code>python run_cli.py</code></div>
+                        </li>
+                        <li><strong>Follow the interactive menu</strong></li>
+                        <li><strong>Try analyzing the sample file:</strong>
+                            <div class="code-block"><code>data/input/sample.txt</code></div>
+                        </li>
+                    </ol>
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb"></i> Quick Test API</h6>
+                        <p class="mb-2">Test the REST API with curl:</p>
+                        <div class="code-block">
+                            <code>
+                                curl -X POST http://localhost:3000/api/analyze \<br>
+                                &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
+                                &nbsp;&nbsp;-d '{"text": "這是一個測試"}'
+                            </code>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Next Steps -->
+                <section id="next-steps">
+                    <h2 class="section-title">🚀 Next Steps</h2>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-star text-warning"></i> Explore Features</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="features.html" class="text-decoration-none">📊 Core Features</a></li>
+                                        <li><a href="features.html#advanced" class="text-decoration-none">🆕 Advanced Features</a></li>
+                                        <li><a href="features.html#rest-api" class="text-decoration-none">🔌 REST API</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-cogs text-primary"></i> Customize</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="configuration.html" class="text-decoration-none">⚙️ Configuration</a></li>
+                                        <li><a href="configuration.html#dictionaries" class="text-decoration-none">📚 Custom Dictionaries</a></li>
+                                        <li><a href="configuration.html#sentiment" class="text-decoration-none">😊 Sentiment Words</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-code text-success"></i> Development</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="api.html" class="text-decoration-none">📖 API Documentation</a></li>
+                                        <li><a href="api.html#examples" class="text-decoration-none">💻 Code Examples</a></li>
+                                        <li><a href="ml-development.html" class="text-decoration-none">🤖 ML Development</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-question-circle text-info"></i> Need Help?</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a href="troubleshooting.html" class="text-decoration-none">🔧 Troubleshooting</a></li>
+                                        <li><a href="troubleshooting.html#faq" class="text-decoration-none">❓ FAQ</a></li>
+                                        <li><a href="documentation.html" class="text-decoration-none">📄 Complete Docs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-primary mt-4">
+                        <h6><i class="fas fa-graduation-cap"></i> Learning Path Recommendations</h6>
+                        <ol class="mb-0">
+                            <li><strong>Beginners:</strong> Start with <a href="usage.html" class="alert-link">Usage Guide</a> → <a href="features.html" class="alert-link">Features</a> → <a href="configuration.html" class="alert-link">Configuration</a></li>
+                            <li><strong>Developers:</strong> Go to <a href="api.html" class="alert-link">API Documentation</a> → <a href="api.html#examples" class="alert-link">Code Examples</a> → <a href="ml-development.html" class="alert-link">ML Development</a></li>
+                            <li><strong>Researchers:</strong> Check <a href="features.html#advanced" class="alert-link">Advanced Features</a> → <a href="ml-development.html" class="alert-link">ML Development</a> → <a href="configuration.html" class="alert-link">Custom Configuration</a></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <div class="docs-navigation">
+                    <a href="index.html" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                    <a href="features.html" class="btn btn-primary">
+                        Next: Features <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 

@@ -9,6 +9,8 @@ A comprehensive Chinese text analysis application with both web and CLI interfac
 
 *Or view it online by opening the file directly: `docs/documentation.html`*
 
+**It wrote with heart, so please just goes for it. All details are stated. Can directly follow the navigation bar or the table of content.**
+
 ## 🚀 Quick Start
 
 The application runs on **port 3000** by default. To start:
@@ -26,7 +28,8 @@ Visit: http://localhost:3000
 - **Visualizations**: Word clouds, interactive charts, advanced analytics  
 - **Text Conversion**: Traditional ↔ Simplified Chinese conversion
 - **Data Export**: JSON, CSV, Excel, HTML reports with ZIP downloads
-- **Dual Interface**: Web UI and command-line tools
+- **REST API Integration**: 10+ RESTful endpoints for programmatic access
+- **Multiple Interfaces**: Web UI, command-line tools, and REST API
 
 ### 🆕 Advanced Features
 - **📊 Text Similarity Analysis**: Multi-text comparison with semantic analysis and similarity matrices
@@ -117,8 +120,6 @@ chinese_text_analyzer_web/
 │       └── sentiment_mapping.json # Sentiment analysis mappings
 ├── docs/                        # Documentation
 │   └── documentation.html      # Complete project documentation
-├── logs/                        # Application logs
-├── models/                      # ML models and data
 ├── venv/                        # Virtual environment
 ├── visualizations/              # Global visualization outputs
 ├── requirements.txt             # Python dependencies

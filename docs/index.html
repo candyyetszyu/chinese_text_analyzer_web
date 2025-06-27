@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Text Analyzer - Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .hero {
+            padding: 4rem 0;
+        }
+        .doc-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            color: #333;
+            height: 100%;
+        }
+        .doc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .doc-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .badge-new {
+            background: #ff6b6b;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+        }
+        .feature-highlight {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-language"></i> Chinese Text Analyzer Docs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sections">Sections</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documentation.html">Single Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="overview" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-3 fw-bold mb-3">
+                        <i class="fas fa-book-open"></i> Documentation
+                    </h1>
+                    <p class="lead mb-4">
+                        Comprehensive documentation for the Chinese Text Analyzer - your complete guide to advanced Chinese text analysis, from basic setup to machine learning integration.
+                    </p>
+                    
+                    <div class="feature-highlight">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <i class="fas fa-rocket fa-2x mb-2"></i>
+                                <div><strong>快速開始</strong></div>
+                                <small>5分鐘快速上手</small>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-api fa-2x mb-2"></i>
+                                <div><strong>REST API</strong></div>
+                                <small>10+ 個端點就緒</small>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-brain fa-2x mb-2"></i>
+                                <div><strong>機器學習就緒</strong></div>
+                                <small>可擴展的機器學習框架</small>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-chart-line fa-2x mb-2"></i>
+                                <div><strong>進階視覺化</strong></div>
+                                <small>互動式圖表</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="#sections" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play"></i> Start Reading
+                        </a>
+                        <a href="quick-start.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-bolt"></i> Quick Start
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Sections -->
+    <section id="sections" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">📚 文件章節</h2>
+            
+            <!-- Getting Started Row -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4 class="card-title">Quick Start Guide</h4>
+                            <p class="card-text">Get up and running quickly with step-by-step installation and setup instructions.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Installation checklist</li>
+                                <li>✓ System requirements</li>
+                                <li>✓ First analysis</li>
+                            </ul>
+                            <a href="quick-start.html" class="btn btn-primary">
+                                <i class="fas fa-play"></i> Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="card-title">Features Overview</h4>
+                            <p class="card-text">Explore comprehensive text analysis features and advanced capabilities.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Core features</li>
+                                <li>✓ Advanced features</li>
+                                <li>✓ Feature comparison</li>
+                            </ul>
+                            <a href="features.html" class="btn btn-primary">
+                                <i class="fas fa-magic"></i> Explore Features
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage & Configuration Row -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h4 class="card-title">Usage Guide</h4>
+                            <p class="card-text">Learn how to use both web and CLI interfaces effectively.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Web interface</li>
+                                <li>✓ Command line tools</li>
+                                <li>✓ File processing</li>
+                            </ul>
+                            <a href="usage.html" class="btn btn-primary">
+                                <i class="fas fa-book"></i> Learn Usage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4 class="card-title">Configuration</h4>
+                            <p class="card-text">Customize dictionaries, sentiment words, and advanced settings.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Custom dictionaries</li>
+                                <li>✓ Sentiment configuration</li>
+                                <li>✓ Advanced settings</li>
+                            </ul>
+                            <a href="configuration.html" class="btn btn-primary">
+                                <i class="fas fa-wrench"></i> Configure
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API & Development Row -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4 class="card-title">
+                                API Documentation
+                                <span class="badge-new">NEW</span>
+                            </h4>
+                            <p class="card-text">Complete REST API reference with examples in multiple languages.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ 10+ endpoints</li>
+                                <li>✓ Code examples</li>
+                                <li>✓ Integration guide</li>
+                            </ul>
+                            <a href="api.html" class="btn btn-primary">
+                                <i class="fas fa-terminal"></i> API Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="card-title">
+                                ML Development
+                                <span class="badge-new">NEW</span>
+                            </h4>
+                            <p class="card-text">Extend with machine learning models and advanced AI capabilities.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Custom ML models</li>
+                                <li>✓ GPU acceleration</li>
+                                <li>✓ Model training</li>
+                            </ul>
+                            <a href="ml-development.html" class="btn btn-primary">
+                                <i class="fas fa-robot"></i> ML Guide
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support & Reference Row -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-life-ring"></i>
+                            </div>
+                            <h4 class="card-title">Troubleshooting</h4>
+                            <p class="card-text">Solutions to common issues and frequently asked questions.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ Common issues</li>
+                                <li>✓ Error solutions</li>
+                                <li>✓ FAQ section</li>
+                            </ul>
+                            <a href="troubleshooting.html" class="btn btn-primary">
+                                <i class="fas fa-question-circle"></i> Get Help
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card doc-card">
+                        <div class="card-body text-center p-4">
+                            <div class="doc-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h4 class="card-title">Complete Reference</h4>
+                            <p class="card-text">Full single-page documentation with all sections combined.</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>✓ All-in-one page</li>
+                                <li>✓ Searchable content</li>
+                                <li>✓ Print-friendly</li>
+                            </ul>
+                            <a href="documentation.html" class="btn btn-primary">
+                                <i class="fas fa-file-alt"></i> Full Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3 class="mb-4">🔗 快速存取連結</h3>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <a href="quick-start.html#installation" class="btn btn-outline-light btn-sm">Installation</a>
+                            <a href="features.html#rest-api" class="btn btn-outline-light btn-sm">REST API</a>
+                            <a href="api.html#examples" class="btn btn-outline-light btn-sm">Code Examples</a>
+                            <a href="configuration.html#dictionaries" class="btn btn-outline-light btn-sm">Custom Dict</a>
+                            <a href="usage.html#file-upload" class="btn btn-outline-light btn-sm">File Upload</a>
+                            <a href="ml-development.html#gpu" class="btn btn-outline-light btn-sm">GPU Setup</a>
+                            <a href="troubleshooting.html#common" class="btn btn-outline-light btn-sm">Common Issues</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <div class="container">
+            <p class="mb-2">
+                <strong>Chinese Text Analyzer Documentation</strong>
+            </p>
+            <p class="small opacity-75">
+                專為中文文本分析的開發者和研究人員精心打造 ❤️
+            </p>
+            <div class="mt-3">
+                <a href="#overview" class="text-white text-decoration-none me-3">
+                    <i class="fas fa-arrow-up"></i> Back to Top
+                </a>
+                <a href="documentation.html" class="text-white text-decoration-none">
+                    <i class="fas fa-book"></i> Single Page Docs
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.doc-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .doc-card {
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

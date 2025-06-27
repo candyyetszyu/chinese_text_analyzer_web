@@ -71,6 +71,74 @@
         .bg-purple {
             background-color: #9b59b6 !important;
         }
+        
+        /* Copy button for code blocks */
+        .code-block {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c757d;
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .copy-btn:hover {
+            opacity: 1;
+            background: #495057;
+        }
+        
+        /* Quick start checklist */
+        .checklist-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* System requirements */
+        .requirement-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 4px;
+            border-left: 3px solid #007bff;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -85,13 +153,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#quick-checklist">Quick Start</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#advanced-features">Advanced</a></li>
                     <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
                     <li class="nav-item"><a class="nav-link" href="#usage">Usage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#port-config">Port Config</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#output-storage">Output & Storage</a></li>
                     <li class="nav-item"><a class="nav-link" href="#api">API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#api-usage">API Usage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#configuration">Configuration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ml-development">ML Development</a></li>
                     <li class="nav-item"><a class="nav-link" href="#troubleshooting">Troubleshooting</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                 </ul>
             </div>
         </div>
@@ -129,21 +201,158 @@
                 <div class="toc">
                     <h5 class="text-primary">Table of Contents</h5>
                     <ul class="list-unstyled">
+                        <li><a href="#quick-checklist" class="text-decoration-none">Quick Start Checklist</a></li>
+                        <li><a href="#system-requirements" class="text-decoration-none">System Requirements</a></li>
                         <li><a href="#features" class="text-decoration-none">Features</a></li>
                         <li class="ms-2"><a href="#advanced-features" class="text-decoration-none small text-muted">Advanced Features</a></li>
                         <li><a href="#installation" class="text-decoration-none">Installation</a></li>
                         <li><a href="#usage" class="text-decoration-none">Usage</a></li>
+                        <li><a href="#output-storage" class="text-decoration-none">Output & Storage</a></li>
                         <li><a href="#port-config" class="text-decoration-none">Port Configuration</a></li>
                         <li><a href="#api" class="text-decoration-none">API Documentation</a></li>
+                        <li><a href="#api-usage" class="text-decoration-none">REST API Usage</a></li>
                         <li><a href="#configuration" class="text-decoration-none">Configuration</a></li>
                         <li><a href="#troubleshooting" class="text-decoration-none">Troubleshooting</a></li>
                         <li><a href="#dependencies" class="text-decoration-none">Dependencies</a></li>
+                        <li><a href="#ml-development" class="text-decoration-none">ML Development</a></li>
+                        <li><a href="#performance" class="text-decoration-none">Performance & Security</a></li>
+                        <li><a href="#faq" class="text-decoration-none">FAQ</a></li>
                     </ul>
                 </div>
             </div>
 
             <!-- Main Content -->
             <div class="col-lg-9">
+                
+                <!-- Quick Start Checklist -->
+                <section id="quick-checklist">
+                    <h2 class="section-title">✅ Quick Start Checklist</h2>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="mb-3">Follow this checklist to get up and running quickly:</p>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check1">
+                                    <label class="form-check-label" for="check1">
+                                        <strong>Python 3.8+</strong> installed on your system
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check2">
+                                    <label class="form-check-label" for="check2">
+                                        Clone repository: <code>git clone &lt;repository-url&gt;</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check3">
+                                    <label class="form-check-label" for="check3">
+                                        Run setup: <code>python setup.py</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check4">
+                                    <label class="form-check-label" for="check4">
+                                        Activate virtual environment: <code>source venv/bin/activate</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check5">
+                                    <label class="form-check-label" for="check5">
+                                        Start application: <code>python run_web.py</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checklist-item">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check6">
+                                    <label class="form-check-label" for="check6">
+                                        Open browser: <code>http://localhost:3000</code>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-success mt-3">
+                                <i class="fas fa-rocket"></i> <strong>Ready!</strong> You should now see the Chinese Text Analyzer interface.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Requirements -->
+                <section id="system-requirements">
+                    <h2 class="section-title">💻 System Requirements</h2>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-desktop"></i> Minimum Requirements</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="requirement-item">
+                                        <strong>Python:</strong> 3.8 or higher
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>RAM:</strong> 2GB minimum, 4GB recommended
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Storage:</strong> 1GB free space
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>OS:</strong> Windows 10+, macOS 10.14+, Ubuntu 18.04+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-rocket"></i> Recommended for Advanced Features</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="requirement-item">
+                                        <strong>RAM:</strong> 8GB+ for large text processing
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>GPU:</strong> CUDA-compatible for GPU acceleration
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Redis:</strong> For task queue functionality
+                                    </div>
+                                    <div class="requirement-item">
+                                        <strong>Multi-core CPU:</strong> For parallel processing
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <h6><i class="fas fa-info-circle"></i> Platform-Specific Notes</h6>
+                        <ul class="mb-0">
+                            <li><strong>Windows:</strong> Use WSL2 for best compatibility</li>
+                            <li><strong>macOS:</strong> Install Xcode Command Line Tools</li>
+                            <li><strong>Linux:</strong> Install build-essential package</li>
+                            <li><strong>Docker:</strong> Supported via containerization</li>
+                        </ul>
+                    </div>
+                </section>
                 
                 <!-- Features Section -->
                 <section id="features">
@@ -217,6 +426,42 @@
                                         <li>✓ Visualization exports</li>
                                         <li>✓ Data analysis summaries</li>
                                         <li>✓ Custom report templates</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-code text-purple"></i> REST API Integration
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ 10+ RESTful API endpoints</li>
+                                        <li>✓ JSON request/response format</li>
+                                        <li>✓ Programmatic text analysis</li>
+                                        <li>✓ File upload and processing</li>
+                                        <li>✓ Batch analysis operations</li>
+                                        <li>✓ Cross-platform integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card feature-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-desktop text-secondary"></i> Multiple Interfaces
+                                    </h5>
+                                    <ul class="list-unstyled">
+                                        <li>✓ User-friendly web interface</li>
+                                        <li>✓ Command-line tools (CLI)</li>
+                                        <li>✓ REST API for integration</li>
+                                        <li>✓ Cross-platform compatibility</li>
+                                        <li>✓ Real-time processing</li>
+                                        <li>✓ Flexible deployment options</li>
                                     </ul>
                                 </div>
                             </div>
@@ -421,6 +666,196 @@
                     </div>
                 </section>
 
+                <!-- Output & Storage Section -->
+                <section id="output-storage">
+                    <h2 class="section-title">📁 Output & Storage</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Storage Location:</strong> All analysis results are stored in the <code>data/output</code> directory
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-globe text-primary"></i> Web Interface Results</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Storage Path:</strong> <code>data/output/results/</code></p>
+                                    
+                                    <h6>Generated Files:</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-image text-success"></i> <strong>Visualizations:</strong> PNG charts and graphs</li>
+                                        <li class="mb-2"><i class="fas fa-file-code text-warning"></i> <strong>Interactive Charts:</strong> HTML files with Plotly</li>
+                                        <li class="mb-2"><i class="fas fa-file-alt text-info"></i> <strong>Reports:</strong> Comprehensive HTML reports</li>
+                                        <li class="mb-2"><i class="fas fa-database text-secondary"></i> <strong>Data:</strong> JSON analysis results</li>
+                                    </ul>
+                                    
+                                    <div class="code-block">
+                                        <code>
+                                            data/output/results/<br>
+                                            ├── [analysis-id]/<br>
+                                            │   ├── wordcloud.png<br>
+                                            │   ├── word_freq.png<br>
+                                            │   ├── pos_distribution.png<br>
+                                            │   ├── sentiment.png<br>
+                                            │   ├── entities.png<br>
+                                            │   ├── interactive_heatmap.html<br>
+                                            │   ├── dashboard.html<br>
+                                            │   └── report.html
+                                        </code>
+                                    </div>
+                                    
+                                    <div class="alert alert-light mt-3">
+                                        <small><i class="fas fa-clock"></i> Files are organized by unique analysis IDs</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-terminal text-success"></i> CLI Interface Results</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Storage Path:</strong> <code>data/output/</code></p>
+                                    
+                                    <h6>Generated Files:</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-file-csv text-success"></i> <strong>Data Export:</strong> CSV, JSON, Excel files</li>
+                                        <li class="mb-2"><i class="fas fa-image text-warning"></i> <strong>Charts:</strong> PNG visualization files</li>
+                                        <li class="mb-2"><i class="fas fa-file-archive text-info"></i> <strong>Batch Results:</strong> ZIP archives</li>
+                                        <li class="mb-2"><i class="fas fa-upload text-secondary"></i> <strong>Uploads:</strong> User uploaded files</li>
+                                    </ul>
+                                    
+                                    <div class="code-block">
+                                        <code>
+                                            data/output/<br>
+                                            ├── uploads/<br>
+                                            ├── similarity/<br>
+                                            ├── visualizations/<br>
+                                            ├── results/<br>
+                                            ├── analysis_results.json<br>
+                                            ├── word_frequency.csv<br>
+                                            ├── sentiment_analysis.xlsx<br>
+                                            └── batch_results.zip
+                                        </code>
+                                    </div>
+                                    
+                                    <div class="alert alert-light mt-3">
+                                        <small><i class="fas fa-folder"></i> Organized by analysis type and date</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4">📂 Directory Details</h4>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-upload fa-2x text-primary mb-2"></i>
+                                    <h6>uploads/</h6>
+                                    <small class="text-muted">User uploaded files and saved conversions</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-project-diagram fa-2x text-success mb-2"></i>
+                                    <h6>similarity/</h6>
+                                    <small class="text-muted">Text similarity analysis matrices and results</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-chart-bar fa-2x text-warning mb-2"></i>
+                                    <h6>visualizations/</h6>
+                                    <small class="text-muted">Generated charts, graphs, and interactive plots</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-database fa-2x text-info mb-2"></i>
+                                    <h6>results/</h6>
+                                    <small class="text-muted">Web interface analysis results by unique ID</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-4">
+                        <h6><i class="fas fa-exclamation-triangle"></i> File Management Tips</h6>
+                        <ul class="mb-0">
+                            <li><strong>Cleanup:</strong> Regularly clean old analysis results to save disk space</li>
+                            <li><strong>Backup:</strong> Important results should be backed up to external storage</li>
+                            <li><strong>Access:</strong> Web results can be accessed via browser URLs</li>
+                            <li><strong>CLI Export:</strong> Use CLI for batch export and processing</li>
+                            <li><strong>File Size:</strong> Large files may take longer to generate and download</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="mt-4">🔗 Accessing Results</h4>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-globe text-primary"></i> Web Interface Access</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Direct URL access:<br>
+                                            http://localhost:3000/static/results/[analysis-id]/report.html<br><br>
+                                            
+                                            # Download via API:<br>
+                                            GET /api/download_report/[analysis-id]<br><br>
+                                            
+                                            # Bulk download:<br>
+                                            POST /api/download_all_visualizations
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-terminal text-success"></i> CLI Interface Access</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Navigate to output directory:<br>
+                                            cd data/output<br><br>
+                                            
+                                            # List all results:<br>
+                                            ls -la<br><br>
+                                            
+                                            # View specific analysis:<br>
+                                            cat analysis_results.json
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Port Configuration Section -->
                 <section id="port-config">
                     <h2 class="section-title">🔧 Port Configuration</h2>
@@ -577,7 +1012,7 @@
                         <div class="code-block">
                             <code>
                                 {<br>
-                                &nbsp;&nbsp;"text": "要转换的中文文本",<br>
+                                &nbsp;&nbsp;"text": "要轉換的中文文本",<br>
                                 &nbsp;&nbsp;"conversion_type": "s2t"  // "s2t" or "t2s"<br>
                                 }
                             </code>
@@ -595,9 +1030,9 @@
                             <code>
                                 {<br>
                                 &nbsp;&nbsp;"texts": [<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;"第一个文本内容",<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;"第二个文本内容",<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;"第三个文本内容"<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第一個文本內容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第二個文本內容",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"第三個文本內容"<br>
                                 &nbsp;&nbsp;],<br>
                                 &nbsp;&nbsp;"algorithms": ["semantic", "tfidf", "jaccard"]  // optional<br>
                                 }
@@ -672,7 +1107,7 @@
                                 {<br>
                                 &nbsp;&nbsp;"success": true,<br>
                                 &nbsp;&nbsp;"filename": "document.pdf",<br>
-                                &nbsp;&nbsp;"content": "提取的文本内容...",<br>
+                                &nbsp;&nbsp;"content": "提取的文本內容...",<br>
                                 &nbsp;&nbsp;"metadata": {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;"pages": 10,<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;"file_size": "2.5 MB",<br>
@@ -768,7 +1203,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;"advanced": true,<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;"interactive": true,<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;"similarity": true,<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;"title": "自定义报告标题"<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"title": "自定義報告標題"<br>
                                 &nbsp;&nbsp;}<br>
                                 }
                             </code>
@@ -793,10 +1228,103 @@
 
                     <div class="api-endpoint">
                         <h5><span class="badge bg-primary">GET</span> /api/download_report/&lt;report_id&gt;</h5>
-                        <p><strong>Description:</strong> Download generated reports as ZIP archives.</p>
+                        <p><strong>Description:</strong> Download generated reports as HTML files.</p>
                         
                         <h6>Response:</h6>
-                        <p>Returns a ZIP file containing all analysis results, visualizations, and interactive components.</p>
+                        <p>Returns an HTML file containing the complete analysis report.</p>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/generate_comprehensive_report</h5>
+                        <p><strong>Description:</strong> Generate comprehensive reports combining multiple analysis types.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"analysis_data": {...},  // Basic analysis results<br>
+                                &nbsp;&nbsp;"similarity_data": {...},  // Similarity analysis results<br>
+                                &nbsp;&nbsp;"interactive_data": {...},  // Interactive visualizations<br>
+                                &nbsp;&nbsp;"options": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"title": "Custom Report Title",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"include_json": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"include_data": true<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"report_id": "comprehensive-report-uuid",<br>
+                                &nbsp;&nbsp;"report_path": "/static/results/.../comprehensive_report.html",<br>
+                                &nbsp;&nbsp;"includes": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"basic_analysis": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"similarity_analysis": true,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"interactive_charts": true<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-primary">GET</span> /input_texts/&lt;filename&gt;</h5>
+                        <p><strong>Description:</strong> Serve sample text files from the input directory.</p>
+                        
+                        <h6>Response:</h6>
+                        <p>Returns the requested sample text file for analysis.</p>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/save_file</h5>
+                        <p><strong>Description:</strong> Save converted or processed text to a file.</p>
+                        
+                        <h6>Request Body:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"text": "要保存的文本內容",<br>
+                                &nbsp;&nbsp;"filename": "custom_filename.txt"  // optional<br>
+                                }
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <div class="code-block">
+                            <code>
+                                {<br>
+                                &nbsp;&nbsp;"success": true,<br>
+                                &nbsp;&nbsp;"file_path": "/data/output/uploads/filename.txt"<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-primary">GET</span> /uploads/&lt;filename&gt;</h5>
+                        <p><strong>Description:</strong> Download saved files from the uploads directory.</p>
+                        
+                        <h6>Response:</h6>
+                        <p>Returns the requested file as a downloadable attachment.</p>
+                    </div>
+
+                    <div class="api-endpoint">
+                        <h5><span class="badge bg-success">POST</span> /api/download_all_visualizations</h5>
+                        <p><strong>Description:</strong> Download all visualizations for an analysis as a ZIP archive.</p>
+                        
+                        <h6>Request Body (Form Data):</h6>
+                        <div class="code-block">
+                            <code>
+                                analysis_id: "uuid-of-analysis"
+                            </code>
+                        </div>
+
+                        <h6>Response:</h6>
+                        <p>Returns a ZIP file containing all PNG and HTML visualization files.</p>
                     </div>
 
                     <h4>📋 Request/Response Examples</h4>
@@ -807,7 +1335,7 @@
                             <code>
                                 # 1. Basic text analysis<br>
                                 POST /api/analyze<br>
-                                {"text": "现代科技改变了人们的生活方式"}<br><br>
+                                {"text": "現代科技改變了人們的生活方式"}<br><br>
                                 
                                 # 2. Generate interactive visualizations<br>
                                 POST /api/visualizations/advanced<br>
@@ -835,28 +1363,704 @@
                     </div>
                 </section>
 
+                <!-- REST API Usage Section -->
+                <section id="api-usage">
+                    <h2 class="section-title">🔌 REST API Usage</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Integration Ready:</strong> You can integrate the Chinese Text Analyzer with any application that can make HTTP requests. Here are practical examples in different programming languages.
+                    </div>
+
+                    <h4>🐍 Python Examples</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-python text-primary"></i> Basic Text Analysis</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            import requests<br>
+                                            import json<br><br>
+                                            
+                                            # API endpoint<br>
+                                            url = "http://localhost:3000/api/analyze"<br><br>
+                                            
+                                            # Request data<br>
+                                            data = {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"text": "現代科技改變了人們的生活方式",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"advanced_viz": ["pie", "vertical"]<br>
+                                            }<br><br>
+                                            
+                                            # Make request<br>
+                                            response = requests.post(url, json=data)<br><br>
+                                            
+                                            if response.status_code == 200:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;result = response.json()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Analysis ID:", result['analysis_id'])<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Word Frequency:", result['word_frequency'])<br>
+                                            else:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;print("Error:", response.text)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-python text-success"></i> Text Similarity Analysis</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            import requests<br><br>
+                                            
+                                            url = "http://localhost:3000/api/similarity/analyze"<br><br>
+                                            
+                                            data = {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"texts": [<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"人工智慧發展迅速",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"機器學習技術進步",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"自然語言處理應用"<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;],<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"algorithms": ["semantic", "tfidf"]<br>
+                                            }<br><br>
+                                            
+                                            response = requests.post(url, json=data)<br>
+                                            result = response.json()<br><br>
+                                            
+                                            # Access similarity matrix<br>
+                                            similarity_matrix = result['similarities']['semantic']<br>
+                                            print("Semantic similarities:", similarity_matrix)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🌐 JavaScript/Node.js Examples</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-js-square text-warning"></i> Frontend Integration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            // Fetch API example<br>
+                                            async function analyzeText(text) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;try {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const response = await fetch('http://localhost:3000/api/analyze', {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method: 'POST',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Content-Type': 'application/json',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body: JSON.stringify({<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: text,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advanced_viz: ["pie", "vertical"]<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const result = await response.json();<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('Analysis completed:', result.analysis_id);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;} catch (error) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.error('Analysis failed:', error);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            }<br><br>
+                                            
+                                            // Usage<br>
+                                            analyzeText("這是一個測試文本");
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-node-js text-success"></i> Node.js Backend</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            const axios = require('axios');<br><br>
+                                            
+                                            class ChineseTextAnalyzer {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;constructor(baseURL = 'http://localhost:3000') {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.baseURL = baseURL;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;async analyze(text, options = {}) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.post(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`${this.baseURL}/api/analyze`,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ text, ...options }<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.data;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (error) {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new Error(`Analysis failed: ${error.message}`);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;async convert(text, direction = 'to_traditional') {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const response = await axios.post(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`${this.baseURL}/api/convert`,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ text, direction }<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.data.converted_text;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                            }<br><br>
+                                            
+                                            // Usage<br>
+                                            const analyzer = new ChineseTextAnalyzer();<br>
+                                            analyzer.analyze("測試文本").then(console.log);
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🛠️ cURL Examples</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-terminal text-dark"></i> Basic Analysis</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Text analysis<br>
+                                            curl -X POST http://localhost:3000/api/analyze \<br>
+                                            &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
+                                            &nbsp;&nbsp;-d '{<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"text": "現代科技改變了人們的生活方式",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"advanced_viz": ["pie", "vertical"]<br>
+                                            &nbsp;&nbsp;}'<br><br>
+                                            
+                                            # Text conversion<br>
+                                            curl -X POST http://localhost:3000/api/convert \<br>
+                                            &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
+                                            &nbsp;&nbsp;-d '{<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"text": "简体中文文本",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"direction": "to_traditional"<br>
+                                            &nbsp;&nbsp;}'
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-upload text-info"></i> File Upload</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Upload and parse file<br>
+                                            curl -X POST http://localhost:3000/api/file/upload \<br>
+                                            &nbsp;&nbsp;-F "file=@document.pdf"<br><br>
+                                            
+                                            # Check system capabilities<br>
+                                            curl -X GET http://localhost:3000/api/system/capabilities<br><br>
+                                            
+                                            # Download report<br>
+                                            curl -X GET http://localhost:3000/api/download_report/[report-id] \<br>
+                                            &nbsp;&nbsp;-o analysis_report.html
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>☕ Java Example</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6><i class="fab fa-java text-danger"></i> Java Integration</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    import java.net.http.HttpClient;<br>
+                                    import java.net.http.HttpRequest;<br>
+                                    import java.net.http.HttpResponse;<br>
+                                    import java.net.URI;<br>
+                                    import java.time.Duration;<br><br>
+                                    
+                                    public class ChineseTextAnalyzer {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;private final HttpClient client;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;private final String baseUrl;<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;public ChineseTextAnalyzer(String baseUrl) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.baseUrl = baseUrl;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.client = HttpClient.newBuilder()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.connectTimeout(Duration.ofSeconds(10))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;public String analyzeText(String text) throws Exception {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String json = String.format(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"{\"text\":\"%s\",\"advanced_viz\":[\"pie\",\"vertical\"]}", <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text.replace("\"", "\\\""))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpRequest request = HttpRequest.newBuilder()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.uri(URI.create(baseUrl + "/api/analyze"))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.header("Content-Type", "application/json")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.POST(HttpRequest.BodyPublishers.ofString(json))<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpResponse&lt;String&gt; response = client.send(request,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpResponse.BodyHandlers.ofString());<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.body();<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;// Usage<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) throws Exception {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ChineseTextAnalyzer analyzer = new ChineseTextAnalyzer("http://localhost:3000");<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String result = analyzer.analyzeText("測試文本");<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result);<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    }
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🔄 Complete Workflow Example</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6><i class="fas fa-project-diagram text-primary"></i> End-to-End Integration (Python)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    import requests<br>
+                                    import time<br><br>
+                                    
+                                    class ChineseTextAnalyzerClient:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, base_url="http://localhost:3000"):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.base_url = base_url<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.session = requests.Session()<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;def full_analysis_workflow(self, text):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Complete analysis workflow with all features"""<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results = {}<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1. Basic analysis<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("🔍 Starting basic analysis...")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;basic_response = self.session.post(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f"{self.base_url}/api/analyze",<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json={"text": text, "advanced_viz": ["pie", "vertical"]}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results['basic'] = basic_response.json()<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 2. Generate advanced visualizations<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("📊 Generating advanced visualizations...")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viz_response = self.session.post(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f"{self.base_url}/api/visualizations/advanced",<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json={"analysis_data": results['basic']}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results['visualizations'] = viz_response.json()<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3. Generate comprehensive report<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("📄 Generating comprehensive report...")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;report_response = self.session.post(<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f"{self.base_url}/api/generate_comprehensive_report",<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json={<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"analysis_data": results['basic'],<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"interactive_data": results['visualizations'],<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"options": {"title": "Complete Analysis Report"}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results['report'] = report_response.json()<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("✅ Analysis completed!")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"📊 Analysis ID: {results['basic']['analysis_id']}")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"📄 Report ID: {results['report']['report_id']}")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"🔗 Report URL: {self.base_url}{results['report']['report_path']}")<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return results<br><br>
+                                    
+                                    # Usage<br>
+                                    client = ChineseTextAnalyzerClient()<br>
+                                    results = client.full_analysis_workflow("現代科技改變了人們的生活方式，人工智慧技術發展迅速。")
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>⚙️ Error Handling & Best Practices</h4>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-exclamation-triangle text-warning"></i> Error Handling</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Python error handling example<br>
+                                            import requests<br>
+                                            from requests.exceptions import RequestException<br><br>
+                                            
+                                            def safe_analyze(text, max_retries=3):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;for attempt in range(max_retries):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.post(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://localhost:3000/api/analyze",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json={"text": text},<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeout=30<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.raise_for_status()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.json()<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except RequestException as e:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Attempt {attempt + 1} failed: {e}")<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if attempt == max_retries - 1:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(2 ** attempt)  # Exponential backoff
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-check text-success"></i> Best Practices</h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-clock text-primary"></i> <strong>Timeout:</strong> Set reasonable timeouts (30s+)</li>
+                                        <li class="mb-2"><i class="fas fa-redo text-warning"></i> <strong>Retry Logic:</strong> Implement exponential backoff</li>
+                                        <li class="mb-2"><i class="fas fa-shield-alt text-success"></i> <strong>Validation:</strong> Validate input text before sending</li>
+                                        <li class="mb-2"><i class="fas fa-memory text-info"></i> <strong>Async:</strong> Use async calls for large texts</li>
+                                        <li class="mb-2"><i class="fas fa-database text-secondary"></i> <strong>Caching:</strong> Cache results for repeated texts</li>
+                                        <li class="mb-2"><i class="fas fa-chart-line text-danger"></i> <strong>Monitoring:</strong> Monitor API response times</li>
+                                    </ul>
+                                    
+                                    <div class="alert alert-light mt-3">
+                                        <small><strong>Rate Limit:</strong> 100 requests/minute per IP</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <h6><i class="fas fa-lightbulb"></i> Integration Tips</h6>
+                        <ul class="mb-0">
+                            <li><strong>Production:</strong> Use environment variables for API URLs</li>
+                            <li><strong>Security:</strong> Implement authentication if deploying publicly</li>
+                            <li><strong>Scaling:</strong> Use load balancers for high-traffic scenarios</li>
+                            <li><strong>Monitoring:</strong> Set up health checks and logging</li>
+                            <li><strong>Documentation:</strong> Generate API documentation for your team</li>
+                        </ul>
+                    </div>
+                </section>
+
                 <!-- Configuration Section -->
                 <section id="configuration">
                     <h2 class="section-title">⚙️ Configuration</h2>
                     
-                    <h4>Custom Dictionaries</h4>
-                    <ul>
-                        <li>Edit <code>config/custom_dict.txt</code> to add domain-specific terms</li>
-                        <li>Update <code>config/chinese_stopwords.txt</code> for custom stopword filtering</li>
-                        <li>Format: <code>word frequency pos_tag</code> (one per line)</li>
-                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Configuration Location:</strong> All configuration files are located in the <code>./config</code> directory
+                    </div>
 
-                    <h4>Sentiment Analysis</h4>
-                    <ul>
-                        <li>Modify <code>config/positive_words.txt</code> for positive sentiment words</li>
-                        <li>Modify <code>config/negative_words.txt</code> for negative sentiment words</li>
-                        <li>Add one word per line</li>
-                    </ul>
+                    <h4>📚 Custom Dictionaries</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-book"></i> config/custom_dict.txt</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Add domain-specific terms and custom word segmentation rules</p>
+                            <p><strong>Format:</strong> <code>word frequency pos_tag</code> (one entry per line)</p>
+                            
+                            <h6>Example entries:</h6>
+                            <div class="code-block">
+                                <code>
+                                    人工智慧 5 n<br>
+                                    機器學習 3 n<br>
+                                    深度學習 4 n<br>
+                                    自然語言處理 2 n<br>
+                                    數據科學 3 n
+                                </code>
+                            </div>
+                            
+                            <h6>Steps to modify:</h6>
+                            <ol>
+                                <li>Open <code>config/custom_dict.txt</code> in a text editor</li>
+                                <li>Add new words following the format: <code>word frequency pos_tag</code></li>
+                                <li>Save the file with UTF-8 encoding</li>
+                                <li>Restart the application to load new dictionary entries</li>
+                            </ol>
+                            
+                            <div class="alert alert-warning">
+                                <small><i class="fas fa-exclamation-triangle"></i> 
+                                <strong>Note:</strong> Higher frequency values (1-10) give words more importance in segmentation</small>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h4>Font Configuration</h4>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-filter"></i> config/chinese_stopwords.txt</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Define words to exclude from analysis (common words like "的", "是", "在")</p>
+                            <p><strong>Format:</strong> One stopword per line</p>
+                            
+                            <h6>Example entries:</h6>
+                            <div class="code-block">
+                                <code>
+                                    的<br>
+                                    是<br>
+                                    在<br>
+                                    了<br>
+                                    和<br>
+                                    也<br>
+                                    等
+                                </code>
+                            </div>
+                            
+                            <h6>Steps to modify:</h6>
+                            <ol>
+                                <li>Open <code>config/chinese_stopwords.txt</code></li>
+                                <li>Add or remove words (one per line)</li>
+                                <li>Save with UTF-8 encoding</li>
+                                <li>Restart application for changes to take effect</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h4>😊 Sentiment Analysis Configuration</h4>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-smile text-success"></i> config/positive_words.txt</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Purpose:</strong> Words that indicate positive sentiment</p>
+                                    
+                                    <h6>Example entries:</h6>
+                                                                <div class="code-block">
+                                <code>
+                                    好<br>
+                                    很棒<br>
+                                    優秀<br>
+                                    喜歡<br>
+                                    滿意<br>
+                                    成功
+                                </code>
+                            </div>
+                                    
+                                    <small><strong>Steps:</strong> Add one positive word per line, save as UTF-8</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-frown text-danger"></i> config/negative_words.txt</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Purpose:</strong> Words that indicate negative sentiment</p>
+                                    
+                                    <h6>Example entries:</h6>
+                                                                <div class="code-block">
+                                <code>
+                                    壞<br>
+                                    糟糕<br>
+                                    失敗<br>
+                                    討厭<br>
+                                    不滿意<br>
+                                    問題
+                                </code>
+                            </div>
+                                    
+                                    <small><strong>Steps:</strong> Add one negative word per line, save as UTF-8</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🗂️ Advanced Configuration Files</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-palette"></i> config/color_scheme.json</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Customize colors for visualizations and charts</p>
+                            
+                            <h6>Example structure:</h6>
+                            <div class="code-block">
+                                <code>
+                                    {<br>
+                                    &nbsp;&nbsp;"primary_colors": ["#1f77b4", "#ff7f0e", "#2ca02c"],<br>
+                                    &nbsp;&nbsp;"background_color": "#ffffff",<br>
+                                    &nbsp;&nbsp;"text_color": "#333333",<br>
+                                    &nbsp;&nbsp;"wordcloud_colors": ["#8B4513", "#2E8B57", "#4682B4"]<br>
+                                    }
+                                </code>
+                            </div>
+                            
+                            <small><strong>Tip:</strong> Use hex color codes for consistent theming</small>
+                        </div>
+                    </div>
+
+                    <h4>🏷️ Mapping Configuration</h4>
+                    <p>The <code>config/mappings/</code> directory contains label mapping files:</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-tags"></i> entity_mapping.json</h6>
+                                    <small>Named entity label translations</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-language"></i> pos_mapping.json</h6>
+                                    <small>Part-of-speech tag mappings</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-heart"></i> sentiment_mapping.json</h6>
+                                    <small>Sentiment category labels</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>💻 Font Configuration</h4>
                     <p>For proper Chinese character display in visualizations:</p>
                     <div class="code-block">
                         <code>python src/utils/setup_chinese_font.py</code>
+                    </div>
+
+                    <h4>⚡ Advanced Features Setup</h4>
+                    <p>For advanced features like task queues and background processing, you'll need to start additional services:</p>
+                    
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6><i class="fas fa-database text-danger"></i> Redis Server (Required for Task Queue)</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Backend storage for distributed task processing</p>
+                            
+                            <h6>Using the provided script:</h6>
+                            <div class="code-block">
+                                <code>
+                                    # Make script executable (first time only)<br>
+                                    chmod +x start_redis.sh<br><br>
+                                    
+                                    # Start Redis server<br>
+                                    ./start_redis.sh
+                                </code>
+                            </div>
+                            
+                            <h6>Manual installation and start:</h6>
+                            <div class="code-block">
+                                <code>
+                                    # On macOS:<br>
+                                    brew install redis<br>
+                                    redis-server<br><br>
+                                    
+                                    # On Ubuntu/Debian:<br>
+                                    sudo apt install redis-server<br>
+                                    redis-server<br><br>
+                                    
+                                    # On Windows:<br>
+                                    # Download from: https://redis.io/download<br>
+                                    # Or use WSL with Ubuntu instructions
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6><i class="fas fa-tasks text-warning"></i> Celery Worker (Required for Background Tasks)</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Process background analysis tasks and batch operations</p>
+                            
+                            <h6>Using the provided script:</h6>
+                            <div class="code-block">
+                                <code>
+                                    # Make script executable (first time only)<br>
+                                    chmod +x start_celery.sh<br><br>
+                                    
+                                    # Start Celery worker<br>
+                                    ./start_celery.sh
+                                </code>
+                            </div>
+                            
+                            <h6>Manual start:</h6>
+                            <div class="code-block">
+                                <code>
+                                    # Activate virtual environment first<br>
+                                    source venv/bin/activate<br><br>
+                                    
+                                    # Start Celery worker<br>
+                                    celery -A src.core.task_queue worker --loglevel=info
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-info-circle"></i> When Do You Need These Services?</h6>
+                        <ul class="mb-0">
+                            <li><strong>Basic Analysis:</strong> Redis and Celery are NOT required</li>
+                            <li><strong>Background Tasks:</strong> Required for <code>/api/tasks/*</code> endpoints</li>
+                            <li><strong>Batch Processing:</strong> Required for processing multiple texts simultaneously</li>
+                            <li><strong>Large File Processing:</strong> Recommended for better performance</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <h6><i class="fas fa-check-circle"></i> Best Practices for Dictionary Modifications</h6>
+                        <ul class="mb-0">
+                            <li><strong>Encoding:</strong> Always save files in UTF-8 encoding</li>
+                            <li><strong>Backup:</strong> Create backups before making changes</li>
+                            <li><strong>Testing:</strong> Test with sample text after modifications</li>
+                            <li><strong>Restart:</strong> Restart the application to load changes</li>
+                            <li><strong>Validation:</strong> Verify changes in the analysis results</li>
+                        </ul>
                     </div>
                 </section>
 
@@ -1013,6 +2217,673 @@
                     </div>
                 </section>
 
+                <!-- Machine Learning Development Section -->
+                <section id="ml-development">
+                    <h2 class="section-title">🤖 Machine Learning Development</h2>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-brain"></i>
+                        <strong>ML Integration:</strong> The Chinese Text Analyzer provides a foundation for integrating advanced machine learning models to enhance analysis capabilities.
+                    </div>
+
+                    <h4>🔍 Current ML Capabilities</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-check-circle text-success"></i> Built-in ML Features</h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-search text-primary"></i> <strong>TF-IDF Keyword Extraction</strong> - Statistical feature extraction</li>
+                                        <li class="mb-2"><i class="fas fa-project-diagram text-success"></i> <strong>Semantic Similarity</strong> - Transformer-based text embeddings</li>
+                                        <li class="mb-2"><i class="fas fa-tags text-warning"></i> <strong>Named Entity Recognition</strong> - Rule-based entity extraction</li>
+                                        <li class="mb-2"><i class="fas fa-heart text-danger"></i> <strong>Sentiment Analysis</strong> - Dictionary-based approach</li>
+                                        <li class="mb-2"><i class="fas fa-language text-info"></i> <strong>POS Tagging</strong> - Jieba-based part-of-speech analysis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-rocket text-primary"></i> GPU Acceleration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Check GPU availability<br>
+                                            import torch<br>
+                                            print("CUDA available:", torch.cuda.is_available())<br>
+                                            print("GPU count:", torch.cuda.device_count())<br><br>
+                                            
+                                            # Model deployment with GPU<br>
+                                            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')<br>
+                                            model = model.to(device)
+                                        </code>
+                                    </div>
+                                    
+                                    <div class="alert alert-light mt-3">
+                                        <small><i class="fas fa-info-circle"></i> The system automatically uses GPU when available for similarity analysis</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🚀 Extending with Custom ML Models</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fab fa-python text-primary"></i> Adding Custom Sentiment Model</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # src/core/ml_models.py<br>
+                                            import torch<br>
+                                            from transformers import AutoTokenizer, AutoModelForSequenceClassification<br><br>
+                                            
+                                            class ChineseSentimentModel:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, model_name="hfl/chinese-roberta-wwm-ext"):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.tokenizer = AutoTokenizer.from_pretrained(model_name)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.model = AutoModelForSequenceClassification.from_pretrained(model_name)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.model.to(self.device)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def predict(self, text):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputs = self.tokenizer(text, return_tensors="pt", truncation=True)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputs = {k: v.to(self.device) for k, v in inputs.items()}<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with torch.no_grad():<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs = self.model(**inputs)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'negative': predictions[0][0].item(),<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'positive': predictions[0][1].item()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-brain text-success"></i> Custom Named Entity Recognition</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Custom NER model integration<br>
+                                            from transformers import AutoTokenizer, AutoModelForTokenClassification<br>
+                                            from transformers import pipeline<br><br>
+                                            
+                                            class ChineseNERModel:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.ner_pipeline = pipeline(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ner",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model="ckiplab/bert-base-chinese-ner",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tokenizer="ckiplab/bert-base-chinese-ner",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregation_strategy="simple"<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def extract_entities(self, text):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entities = self.ner_pipeline(text)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processed_entities = {}<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for entity in entities:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label = entity['entity_group']<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;word = entity['word']<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confidence = entity['score']<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if label not in processed_entities:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processed_entities[label] = []<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processed_entities[label].append({<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text': word,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'confidence': confidence<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return processed_entities
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🔧 Integration with Core System</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6><i class="fas fa-cogs text-primary"></i> Modifying the Analyzer Class</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    # src/core/analyzer.py - Enhanced with ML models<br>
+                                    from .ml_models import ChineseSentimentModel, ChineseNERModel<br><br>
+                                    
+                                    class ChineseTextAnalyzer:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, use_ml_models=False):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# ... existing initialization ...<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.use_ml_models = use_ml_models<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if use_ml_models:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.ml_sentiment = ChineseSentimentModel()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.ml_ner = ChineseNERModel()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("✅ ML models loaded successfully")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except Exception as e:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"⚠️ ML models failed to load: {e}")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.use_ml_models = False<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;def analyze_sentiment_ml(self, text):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Enhanced sentiment analysis using ML models"""<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if self.use_ml_models and hasattr(self, 'ml_sentiment'):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ml_result = self.ml_sentiment.predict(text)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traditional_result = self.analyze_sentiment(text)<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ml_model': ml_result,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'traditional': traditional_result,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'combined_score': (<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ml_result['positive'] * 0.7 + <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traditional_result.get('positive', 0) * 0.3<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.analyze_sentiment(text)
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>📊 Advanced ML Applications</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-cluster fa-2x text-primary mb-3"></i>
+                                    <h6>Topic Modeling</h6>
+                                    <p class="small text-muted">Use LDA, BERTopic, or other algorithms to discover hidden topics in large text collections</p>
+                                    
+                                    <div class="code-block text-start">
+                                        <code>
+                                            # BERTopic integration<br>
+                                            from bertopic import BERTopic<br>
+                                            from sentence_transformers import SentenceTransformer<br><br>
+                                            
+                                            sentence_model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")<br>
+                                            topic_model = BERTopic(embedding_model=sentence_model)<br>
+                                            topics, probs = topic_model.fit_transform(documents)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-robot fa-2x text-success mb-3"></i>
+                                    <h6>Text Classification</h6>
+                                    <p class="small text-muted">Classify texts into custom categories using fine-tuned BERT models</p>
+                                    
+                                    <div class="code-block text-start">
+                                        <code>
+                                            # Custom classifier<br>
+                                            from transformers import pipeline<br><br>
+                                            
+                                            classifier = pipeline(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"text-classification",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;model="custom-chinese-classifier",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;return_all_scores=True<br>
+                                            )<br>
+                                            results = classifier(text)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-compress-arrows-alt fa-2x text-warning mb-3"></i>
+                                    <h6>Text Summarization</h6>
+                                    <p class="small text-muted">Generate automatic summaries using extractive or abstractive methods</p>
+                                    
+                                    <div class="code-block text-start">
+                                        <code>
+                                            # Summarization pipeline<br>
+                                            from transformers import pipeline<br><br>
+                                            
+                                            summarizer = pipeline(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"summarization",<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;model="fnlp/bart-base-chinese"<br>
+                                            )<br>
+                                            summary = summarizer(text, max_length=100)
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🎯 Model Training & Fine-tuning</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-dumbbell text-primary"></i> Training Custom Models</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Training script example<br>
+                                            # scripts/train_sentiment_model.py<br>
+                                            import torch<br>
+                                            from transformers import TrainingArguments, Trainer<br>
+                                            from datasets import Dataset<br><br>
+                                            
+                                            def train_custom_sentiment_model(train_data, model_name):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;# Prepare dataset<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;dataset = Dataset.from_dict({<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text': [item['text'] for item in train_data],<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'labels': [item['label'] for item in train_data]<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;})<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;# Training arguments<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;training_args = TrainingArguments(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output_dir='./models/sentiment',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num_train_epochs=3,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;per_device_train_batch_size=16,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warmup_steps=500,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight_decay=0.01,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logging_dir='./logs',<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;# Initialize trainer<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;trainer = Trainer(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model=model,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args=training_args,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;train_dataset=dataset,<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tokenizer=tokenizer<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;# Train model<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;trainer.train()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;trainer.save_model()
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-cloud-upload-alt text-success"></i> Model Deployment</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Model serving with FastAPI<br>
+                                            # api/ml_server.py<br>
+                                            from fastapi import FastAPI<br>
+                                            from transformers import pipeline<br><br>
+                                            
+                                            app = FastAPI()<br><br>
+                                            
+                                            # Load models on startup<br>
+                                            @app.on_event("startup")<br>
+                                            async def load_models():<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;global sentiment_model, ner_model<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;sentiment_model = pipeline("sentiment-analysis", model="./models/sentiment")<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;ner_model = pipeline("ner", model="./models/ner")<br><br>
+                                            
+                                            @app.post("/predict/sentiment")<br>
+                                            async def predict_sentiment(text: str):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;result = sentiment_model(text)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;return {"sentiment": result}<br><br>
+                                            
+                                            @app.post("/predict/entities")<br>
+                                            async def extract_entities(text: str):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;entities = ner_model(text)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;return {"entities": entities}<br><br>
+                                            
+                                            # Run with: uvicorn api.ml_server:app --host 0.0.0.0 --port 8001
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>⚡ Performance Optimization</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-tachometer-alt text-warning"></i> Model Optimization Techniques</h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-compress text-primary"></i> <strong>Model Quantization:</strong> Reduce model size with minimal accuracy loss</li>
+                                        <li class="mb-2"><i class="fas fa-cut text-success"></i> <strong>Knowledge Distillation:</strong> Create smaller, faster student models</li>
+                                        <li class="mb-2"><i class="fas fa-layer-group text-warning"></i> <strong>ONNX Conversion:</strong> Cross-platform inference optimization</li>
+                                        <li class="mb-2"><i class="fas fa-memory text-info"></i> <strong>Batch Processing:</strong> Process multiple texts simultaneously</li>
+                                        <li class="mb-2"><i class="fas fa-database text-secondary"></i> <strong>Model Caching:</strong> Cache model outputs for repeated inputs</li>
+                                    </ul>
+                                    
+                                    <div class="code-block">
+                                        <code>
+                                            # Model quantization example<br>
+                                            import torch<br>
+                                            from torch.quantization import quantize_dynamic<br><br>
+                                            
+                                            # Quantize model for faster inference<br>
+                                            quantized_model = quantize_dynamic(<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;model, {torch.nn.Linear}, dtype=torch.qint8<br>
+                                            )
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-chart-line text-info"></i> Monitoring & Evaluation</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="code-block">
+                                        <code>
+                                            # Model performance monitoring<br>
+                                            import time<br>
+                                            import psutil<br>
+                                            from sklearn.metrics import classification_report<br><br>
+                                            
+                                            class ModelMonitor:<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.inference_times = []<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.memory_usage = []<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def monitor_inference(self, model, text):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start_time = time.time()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start_memory = psutil.virtual_memory().used<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = model.predict(text)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end_time = time.time()<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end_memory = psutil.virtual_memory().used<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.inference_times.append(end_time - start_time)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.memory_usage.append(end_memory - start_memory)<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result<br><br>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;def get_stats(self):<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'avg_inference_time': np.mean(self.inference_times),<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'avg_memory_usage': np.mean(self.memory_usage)<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🔧 API Integration for ML Models</h4>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6><i class="fas fa-plug text-primary"></i> Adding ML Endpoints to Web API</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <code>
+                                    # src/web/app.py - Enhanced with ML endpoints<br>
+                                    from src.core.ml_models import ChineseSentimentModel, ChineseNERModel<br><br>
+                                    
+                                    # Initialize ML models (optional)<br>
+                                    try:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ml_sentiment = ChineseSentimentModel()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ml_ner = ChineseNERModel()<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ML_AVAILABLE = True<br>
+                                    except Exception as e:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;print(f"ML models not available: {e}")<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;ML_AVAILABLE = False<br><br>
+                                    
+                                    @app.route('/api/ml/sentiment', methods=['POST'])<br>
+                                    def ml_sentiment_analysis():<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;if not ML_AVAILABLE:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({'error': 'ML models not available'}), 400<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;data = request.json<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;text = data.get('text', '')<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;if not text:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({'error': 'No text provided'}), 400<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = ml_sentiment.predict(text)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'success': True,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sentiment': result,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'model_type': 'transformer_based'<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;except Exception as e:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({'error': str(e)}), 500<br><br>
+                                    
+                                    @app.route('/api/ml/entities', methods=['POST'])<br>
+                                    def ml_entity_extraction():<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;if not ML_AVAILABLE:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({'error': 'ML models not available'}), 400<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;data = request.json<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;text = data.get('text', '')<br><br>
+                                    
+                                    &nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entities = ml_ner.extract_entities(text)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'success': True,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'entities': entities,<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'model_type': 'bert_based'<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;except Exception as e:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return jsonify({'error': str(e)}), 500
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <h6><i class="fas fa-lightbulb"></i> ML Development Best Practices</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Version Control:</strong> Use DVC for model versioning</li>
+                                    <li><strong>Experimentation:</strong> Track experiments with MLflow or Weights & Biases</li>
+                                    <li><strong>Testing:</strong> Implement unit tests for model inference</li>
+                                    <li><strong>Documentation:</strong> Document model architecture and performance</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Deployment:</strong> Use Docker for consistent environments</li>
+                                    <li><strong>Monitoring:</strong> Set up alerts for model performance degradation</li>
+                                    <li><strong>A/B Testing:</strong> Compare model versions in production</li>
+                                    <li><strong>Fallbacks:</strong> Always have backup traditional methods</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-exclamation-triangle"></i> Important Considerations</h6>
+                        <ul class="mb-0">
+                            <li><strong>Resource Usage:</strong> ML models can be memory and compute intensive</li>
+                            <li><strong>Cold Start:</strong> Model loading can take time on first request</li>
+                            <li><strong>Dependencies:</strong> Additional packages may significantly increase installation size</li>
+                            <li><strong>Licensing:</strong> Check model licenses for commercial use restrictions</li>
+                            <li><strong>Data Privacy:</strong> Consider data privacy implications when using cloud models</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Performance & Security Section -->
+                <section id="performance">
+                    <h2 class="section-title">⚡ Performance & Security</h2>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-tachometer-alt text-success"></i> Performance Tips</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>GPU Acceleration:</strong> Enable CUDA for large datasets</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Memory Management:</strong> Process large files in chunks</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Task Queue:</strong> Use Celery for background processing</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>Caching:</strong> Redis caches frequently used results</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success"></i> <strong>File Formats:</strong> Use TXT for fastest processing</li>
+                                    </ul>
+                                    
+                                    <div class="alert alert-light mt-3">
+                                        <small><strong>Benchmark:</strong> ~1000 characters/second on standard CPU</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-shield-alt text-warning"></i> Security Considerations</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-lock text-warning"></i> <strong>File Upload:</strong> 10MB size limit enforced</li>
+                                        <li class="mb-2"><i class="fas fa-lock text-warning"></i> <strong>Input Validation:</strong> All text inputs are sanitized</li>
+                                        <li class="mb-2"><i class="fas fa-lock text-warning"></i> <strong>Local Processing:</strong> No data sent to external servers</li>
+                                        <li class="mb-2"><i class="fas fa-lock text-warning"></i> <strong>Temporary Files:</strong> Auto-cleanup after processing</li>
+                                        <li class="mb-2"><i class="fas fa-lock text-warning"></i> <strong>CORS:</strong> Configurable for production deployment</li>
+                                    </ul>
+                                    
+                                    <div class="alert alert-warning mt-3">
+                                        <small><strong>Production:</strong> Use HTTPS and configure firewalls</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section id="faq">
+                    <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Can I analyze texts in other languages besides Chinese?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    This application is specifically designed for Chinese text analysis. While basic word frequency analysis might work with other languages, features like POS tagging, NER, and sentiment analysis are optimized for Chinese language characteristics.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    What's the maximum file size I can upload?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The default upload limit is 10MB. For larger files, you can use the CLI interface or modify the upload limit in the configuration. For optimal performance, we recommend processing files under 5MB through the web interface.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Do I need internet connection to use this application?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No! The application runs completely offline. All processing is done locally on your machine. Internet is only needed for the initial installation of dependencies. Your data never leaves your system.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Can I integrate this with my existing application?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! The application provides a comprehensive REST API. You can integrate it with any application that can make HTTP requests. See the API Documentation section for detailed endpoints and examples.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Why are my Chinese characters showing as squares?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    This is a font issue. Run <code>python src/utils/setup_chinese_font.py</code> to configure Chinese fonts properly. Make sure you have Chinese fonts installed on your system (Microsoft YaHei, SimSun, or similar).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq6">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    How accurate is the sentiment analysis?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The sentiment analysis uses a dictionary-based approach with customizable word lists. Accuracy depends on your domain and text type. You can improve accuracy by adding domain-specific words to the positive_words.txt and negative_words.txt files in the config directory.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Footer -->
                 <footer class="text-center py-4 mt-5 border-top">
                     <p class="text-muted">
@@ -1047,6 +2918,78 @@
                 navbar.classList.remove('navbar-scrolled');
             }
         });
+
+        // Back to top button functionality
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Copy to clipboard functionality
+        function addCopyButtons() {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                if (!block.querySelector('.copy-btn')) {
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'copy-btn';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    copyBtn.title = 'Copy to clipboard';
+                    
+                    copyBtn.addEventListener('click', function() {
+                        const code = block.querySelector('code');
+                        const text = code.innerText || code.textContent;
+                        
+                        navigator.clipboard.writeText(text).then(function() {
+                            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                            copyBtn.style.background = '#28a745';
+                            setTimeout(() => {
+                                copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                                copyBtn.style.background = '#6c757d';
+                            }, 2000);
+                        });
+                    });
+                    
+                    block.appendChild(copyBtn);
+                }
+            });
+        }
+
+        // Add copy buttons after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            addCopyButtons();
+        });
+        
+        // Save checklist progress to localStorage
+        const checkboxes = document.querySelectorAll('#quick-checklist input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            // Load saved state
+            const saved = localStorage.getItem(checkbox.id);
+            if (saved === 'true') {
+                checkbox.checked = true;
+            }
+            
+            // Save state on change
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+        });
     </script>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 </body>
 </html> 

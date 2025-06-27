@@ -1,0 +1,210 @@
+/* Common styles for all documentation pages */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding-top: 80px;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.docs-container {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.docs-header {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.docs-sidebar {
+    position: sticky;
+    top: 2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.docs-sidebar ul {
+    margin-bottom: 0;
+}
+
+.docs-sidebar a {
+    color: #6c757d;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    display: block;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+    transition: all 0.2s;
+}
+
+.docs-sidebar a:hover {
+    color: #495057;
+    background: rgba(0,123,255,0.1);
+    padding-left: 1rem;
+}
+
+.section-title {
+    border-left: 4px solid #007bff;
+    padding-left: 1rem;
+    margin: 2rem 0 1rem 0;
+    color: #2c3e50;
+}
+
+.code-block {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #6c757d;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.copy-btn:hover {
+    opacity: 1;
+    background: #495057;
+}
+
+.installation-step {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid #28a745;
+}
+
+.checklist-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.checklist-item:last-child {
+    border-bottom: none;
+}
+
+.requirement-item {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    border-left: 3px solid #007bff;
+}
+
+.feature-card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.api-endpoint {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+}
+
+.docs-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.docs-navigation .btn {
+    min-width: 120px;
+}
+
+.chinese-text {
+    font-family: 'Microsoft YaHei', '微软雅黑', SimSun, '宋体', sans-serif;
+}
+
+.alert-code {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.badge-new {
+    background: #ff6b6b;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .docs-container {
+        margin-top: 1rem;
+    }
+    
+    .docs-sidebar {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .docs-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .docs-navigation .btn {
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .docs-sidebar,
+    .docs-navigation,
+    .copy-btn {
+        display: none !important;
+    }
+    
+    .docs-container {
+        margin-top: 0;
+    }
+    
+    .section-title {
+        break-after: avoid;
+    }
+    
+    .code-block {
+        break-inside: avoid;
+    }
+} 

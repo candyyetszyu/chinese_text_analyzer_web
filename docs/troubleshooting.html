@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting - Chinese Text Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="docs-common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-language"></i> Chinese Text Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quick-start.html">Quick Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="usage.html">Usage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="configuration.html">Configuration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="api.html">API</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="troubleshooting.html">Troubleshooting</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                        疑難排解
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#common-issues">
+                                <i class="fas fa-exclamation-triangle"></i> 常見問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#installation-problems">
+                                <i class="fas fa-download"></i> 安裝問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#encoding-issues">
+                                <i class="fas fa-font"></i> 編碼問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#performance-issues">
+                                <i class="fas fa-tachometer-alt"></i> 效能問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visualization-problems">
+                                <i class="fas fa-chart-bar"></i> 視覺化問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#web-interface-issues">
+                                <i class="fas fa-globe"></i> 網頁介面問題
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#faq">
+                                <i class="fas fa-question-circle"></i> 常見問答
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="fas fa-life-ring text-primary"></i> 疑難排解指南
+                    </h1>
+                </div>
+
+                <!-- Common Issues -->
+                <section id="common-issues" class="mb-5">
+                    <h2><i class="fas fa-exclamation-triangle text-primary"></i> 常見問題</h2>
+                    
+                    <div class="accordion" id="commonIssuesAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="issue1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                    <i class="fas fa-bug text-danger me-2"></i> 分詞功能無法正常運作
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#commonIssuesAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Symptoms:</strong> Words are incorrectly segmented or proper nouns are split.</p>
+                                    <p><strong>Solutions:</strong></p>
+                                    <ul>
+                                        <li>Add custom terms to <code>config/custom_dict.txt</code></li>
+                                        <li>Check if text encoding is UTF-8</li>
+                                        <li>Update jieba dictionary: <code>jieba.load_userdict('config/custom_dict.txt')</code></li>
+                                        <li>For domain-specific text, create specialized dictionaries</li>
+                                    </ul>
+                                    <div class="code-block">
+                                        <pre><code># Test segmentation
+python -c "
+import jieba
+jieba.load_userdict('config/custom_dict.txt')
+print(list(jieba.cut('测试文本')))
+"</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="issue2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                    <i class="fas fa-memory text-warning me-2"></i> 記憶體不足錯誤
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#commonIssuesAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solutions:</strong></p>
+                                    <ul>
+                                        <li>Reduce text chunk size: <code>--chunk-size 1000</code></li>
+                                        <li>Process files individually instead of batches</li>
+                                        <li>Increase system swap space</li>
+                                        <li>Use text streaming for large files</li>
+                                    </ul>
+                                    <div class="code-block">
+                                        <pre><code># Memory-efficient processing
+python run_cli.py --file large_text.txt --chunk-size 500 --memory-limit 2GB</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="issue3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                    <i class="fas fa-font text-info me-2"></i> 中文字元無法顯示
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#commonIssuesAccordion">
+                                <div class="accordion-body">
+                                    <p><strong>Solutions:</strong></p>
+                                    <ul>
+                                        <li>Install Chinese fonts: <code>python src/utils/setup_chinese_font.py</code></li>
+                                        <li>Set matplotlib font: <code>plt.rcParams['font.sans-serif'] = ['SimHei']</code></li>
+                                        <li>Check system locale settings</li>
+                                        <li>Verify file encoding is UTF-8</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation Problems -->
+                <section id="installation-problems" class="mb-5">
+                    <h2><i class="fas fa-download text-primary"></i> Installation Problems</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Dependency Conflicts</h4>
+                            <div class="alert alert-warning">
+                                <strong>Problem:</strong> Package version conflicts during installation
+                            </div>
+                            <p><strong>Solutions:</strong></p>
+                            <div class="code-block">
+                                <pre><code># Create fresh virtual environment
+python -m venv venv_clean
+source venv_clean/bin/activate  # or venv_clean\Scripts\activate on Windows
+
+# Install with specific versions
+pip install -r requirements.txt --force-reinstall
+
+# Alternative: Use conda
+conda create -n chinese_analyzer python=3.9
+conda activate chinese_analyzer
+pip install -r requirements.txt</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Missing System Dependencies</h4>
+                            <div class="alert alert-danger">
+                                <strong>Problem:</strong> System libraries not found
+                            </div>
+                            <p><strong>Solutions by OS:</strong></p>
+                            <div class="code-block">
+                                <pre><code># Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install python3-dev build-essential
+
+# CentOS/RHEL
+sudo yum groupinstall "Development Tools"
+sudo yum install python3-devel
+
+# macOS
+xcode-select --install
+brew install python</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Encoding Issues -->
+                <section id="encoding-issues" class="mb-5">
+                    <h2><i class="fas fa-font text-primary"></i> Encoding Issues</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>File Encoding Detection</h4>
+                            <div class="code-block">
+                                <pre><code># Check file encoding
+import chardet
+
+def detect_encoding(file_path):
+    with open(file_path, 'rb') as f:
+        raw_data = f.read()
+        result = chardet.detect(raw_data)
+        return result['encoding']
+
+encoding = detect_encoding('your_file.txt')
+print(f"Detected encoding: {encoding}")
+
+# Read with detected encoding
+with open('your_file.txt', 'r', encoding=encoding) as f:
+    content = f.read()</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Common Encoding Problems</h4>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr><th>Encoding</th><th>Description</th><th>Solution</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>GB2312</td><td>Simplified Chinese</td><td>Convert to UTF-8</td></tr>
+                                        <tr><td>Big5</td><td>Traditional Chinese</td><td>Convert to UTF-8</td></tr>
+                                        <tr><td>GBK</td><td>Extended GB2312</td><td>Convert to UTF-8</td></tr>
+                                        <tr><td>UTF-8 BOM</td><td>UTF-8 with BOM</td><td>Remove BOM</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Issues -->
+                <section id="performance-issues" class="mb-5">
+                    <h2><i class="fas fa-tachometer-alt text-primary"></i> Performance Issues</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Slow Processing</h4>
+                            <p><strong>Optimization strategies:</strong></p>
+                            <ul>
+                                <li><strong>Enable parallel processing:</strong> <code>--parallel 4</code></li>
+                                <li><strong>Use caching:</strong> <code>--cache</code></li>
+                                <li><strong>Reduce analysis features:</strong> Skip unnecessary features</li>
+                                <li><strong>Optimize chunk size:</strong> Balance memory and speed</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Memory Usage</h4>
+                            <div class="code-block">
+                                <pre><code># Monitor memory usage
+import psutil
+import os
+
+def get_memory_usage():
+    process = psutil.Process(os.getpid())
+    return process.memory_info().rss / 1024 / 1024  # MB
+
+print(f"Memory usage: {get_memory_usage():.2f} MB")</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Visualization Problems -->
+                <section id="visualization-problems" class="mb-5">
+                    <h2><i class="fas fa-chart-bar text-primary"></i> Visualization Problems</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Charts Not Displaying</h4>
+                            <div class="code-block">
+                                <pre><code># Fix matplotlib backend
+import matplotlib
+matplotlib.use('Agg')  # for headless servers
+# or
+matplotlib.use('TkAgg')  # for GUI
+
+# Check available backends
+print(matplotlib.backend_bases.Backend)</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Font Issues in Charts</h4>
+                            <div class="code-block">
+                                <pre><code># Set Chinese font for matplotlib
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS']
+plt.rcParams['axes.unicode_minus'] = False
+
+# Verify font
+from matplotlib.font_manager import FontProperties
+font = FontProperties(fname='path/to/chinese/font.ttf')
+plt.title('中文标题', fontproperties=font)</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Web Interface Issues -->
+                <section id="web-interface-issues" class="mb-5">
+                    <h2><i class="fas fa-globe text-primary"></i> Web Interface Issues</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Server Won't Start</h4>
+                            <div class="code-block">
+                                <pre><code># Check if port is in use
+netstat -tulpn | grep :5000
+
+# Kill process using port
+sudo kill -9 $(lsof -ti:5000)
+
+# Start with different port
+python run_web.py --port 8080
+
+# Check Flask environment
+export FLASK_ENV=development
+export FLASK_DEBUG=1</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>File Upload Issues</h4>
+                            <p><strong>Common solutions:</strong></p>
+                            <ul>
+                                <li>Check file size limits</li>
+                                <li>Verify file permissions</li>
+                                <li>Ensure upload directory exists</li>
+                                <li>Check disk space</li>
+                            </ul>
+                            <div class="code-block">
+                                <pre><code># Check upload configuration
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB
+
+# Create upload directory
+import os
+os.makedirs('data/uploads', exist_ok=True)</code></pre>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section id="faq" class="mb-5">
+                    <h2><i class="fas fa-question-circle text-primary"></i> Frequently Asked Questions</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
+                                    Q: Can I analyze Traditional Chinese text?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Yes! The analyzer supports both Simplified and Traditional Chinese. Use the conversion utility in <code>src/utils/convert_chinese.py</code> to convert between formats if needed.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
+                                    Q: How do I improve sentiment analysis accuracy?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Customize the sentiment word lists in <code>config/positive_words.txt</code> and <code>config/negative_words.txt</code>. Add domain-specific sentiment words and remove irrelevant ones for your use case.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
+                                    Q: Can I process multiple files at once?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Yes, use the CLI with: <code>python run_cli.py --directory ./text_files/ --recursive</code> to process all files in a directory and subdirectories.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">
+                                    Q: How do I add custom dictionary words?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Edit <code>config/custom_dict.txt</code> and add words in the format: <code>word frequency pos_tag</code>. For example: <code>机器学习 100 n</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5">
+                                    Q: Is GPU acceleration supported?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Yes, GPU acceleration is supported for compatible models. Install CUDA-enabled PyTorch and set <code>use_gpu: true</code> in your configuration.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq6">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">
+                                    Q: How do I export results to different formats?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <strong>A:</strong> Use the <code>--format</code> option: <code>python run_cli.py --file input.txt --format csv</code>. Supported formats: JSON, CSV, TXT, Excel.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Getting Help -->
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-hands-helping"></i> Still Need Help?</h5>
+                    <p>If you're still experiencing issues:</p>
+                    <ul class="mb-0">
+                        <li>Check the <a href="documentation.html">complete documentation</a> for detailed information</li>
+                        <li>Review <a href="configuration.html">configuration options</a> for customization</li>
+                        <li>Enable debug mode for detailed error messages</li>
+                        <li>Check log files for error details</li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="docs-common.js"></script>
+</body>
+</html> 
